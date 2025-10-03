@@ -37,3 +37,25 @@
 
 
 .dropdown:hover .dropbtn {background-color:#BDBDBD;}
+
+aside {
+    
+    float:right;
+    display: flex;
+    flex-direction:column;
+
+}
+
+h1 {
+    background-color:bisque;
+    font-size:50px;
+}
+
+span {
+
+    font-size:20px;
+}
+
+body {
+    background-color:lightcyan
+}
