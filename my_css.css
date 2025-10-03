@@ -49,13 +49,53 @@ aside {
 h1 {
     background-color:bisque;
     font-size:50px;
+    padding:30px;
+    border-radius: 12px;
 }
 
 span {
 
-    font-size:20px;
+    font-size:30px;
 }
 
 body {
     background-color:lightcyan
+}
+a {
+    font-size:25px;
+}
+
+.form {
+    background-color:bisque;
+    border-radius:20px;
+    padding-bottom:200px;
+}
+
+label{
+    font-size:25px;
+    margin:50px;
+    padding-bottom:80px;
+}
+input {
+    margin:12px;
+}
+#butt {
+    padding:30px;
+    background-color:#8377eb;
+    text-decoration:none;
+    color:white;
+    border-radius: 13px;
+    margin:200px;
+    font-size:20px;
+    outline:2px solid rgb(255, 255, 255);
+    
+    
+}
+
+#butt:hover {
+    color:violet;
+}
+
+nav {
+    background-color: gray;
 }
