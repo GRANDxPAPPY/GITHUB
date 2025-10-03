@@ -1,0 +1,105 @@
+.dropbtn {
+  background-color:#003B6D;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+
+.dropdown:hover .dropdown-content {display: block;}
+
+
+.dropdown:hover .dropbtn {background-color:#BDBDBD;}
+
+aside {
+    
+    float:right;
+    display: flex;
+    flex-direction:column;
+
+}
+
+h1 {
+    background-color:bisque;
+    font-size:50px;
+    padding:30px;
+    border-radius: 12px;
+}
+
+span {
+
+    font-size:30px;
+}
+
+body {
+    background-color:lightcyan
+}
+a {
+    font-size:25px;
+}
+
+.form {
+    background-color:bisque;
+    border-radius:20px;
+    padding-bottom:200px;
+}
+
+label{
+    font-size:25px;
+    margin:50px;
+    padding-bottom:80px;
+}
+input {
+    margin:12px;
+}
+#butt {
+    padding:30px;
+    background-color:#8377eb;
+    text-decoration:none;
+    color:white;
+    border-radius: 13px;
+    margin:200px;
+    font-size:20px;
+    outline:2px solid rgb(255, 255, 255);
+    
+    
+}
+
+#butt:hover {
+    color:violet;
+}
+
+nav {
+    background-color: gray;
+}
+
+cite {
+    font-size:14px;
+}
