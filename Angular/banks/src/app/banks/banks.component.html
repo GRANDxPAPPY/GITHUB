@@ -1,0 +1,7 @@
+<ul class="banks">
+  <li *ngFor="let bank of banks" 
+   [class.selected]="bank === selectedBank" 
+   (click)="onSelect(bank)"> 
+   <span class="badge">{{bank.id}}</span> {{bank.name}} 
+ </li>
+</ul>
