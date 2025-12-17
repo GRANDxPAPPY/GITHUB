@@ -1,0 +1,121 @@
+using System.Linq;
+namespace WinFormsApp1
+{
+    using System.ComponentModel;
+    using System.Windows.Forms;
+
+    public class Inventory
+    {
+
+
+        public BindingList<Product> Products { get; set; } = new BindingList<Product>()
+        { 
+            new Product() { ProductID = 1, Name ="ToolKit", InStock = 5, Max=15, Min = 1, Price= 15.50m}
+        };
+        public BindingList<Part> AllParts { get; set; } = new BindingList<Part>() {
+            new Part() {PartID = 1, Name ="Wrench", InStock = 3, Max=10, Min = 0, Price= 11.20m  }
+        };
+
+
+
+        public void addProduct(Product Product)
+        {
+            Products.Add(Product);
+        }
+
+        public bool removeProduct(int ProductID)
+        {
+            var prodctToremove = Products.FirstOrDefault(p => p.ProductID == ProductID);
+            Products.Remove(prodctToremove);
+            return true;
+        }
+
+        public Product lookupProduct(int ProductID)
+        {
+            foreach(var element in Products)
+                { if (element.ProductID == ProductID)
+                {
+                    return element;
+                }
+            }
+            return null;
+        }
+
+        public void updateProduct(int x, Product transferproduct)
+        {
+            foreach (var product in Products)
+            {
+                if (product.ProductID == x)
+                {
+                    product.ProductID = transferproduct.ProductID;
+                    product.Name = transferproduct.Name;
+                    product.Price = transferproduct.Price;
+                    product.InStock = transferproduct.InStock;
+                    product.Min = transferproduct.Min;
+                    product.Max = transferproduct.Max;
+                    product.AssociatedParts = transferproduct.AssociatedParts;
+                }
+            }
+        }
+
+
+        // Making Add Part method we need to get the data form text boxes in form 2
+        public void addPart(Part Part)
+        {
+
+            var newPart = new Part();
+            newPart.PartID = Part.PartID;
+            newPart.Name = Part.Name;
+            newPart.Price = Part.Price;
+            newPart.InStock = Part.InStock;
+            newPart.Min = Part.Min;
+            newPart.Max = Part.Max;
+            AllParts.Add(newPart);
+        }
+
+        public bool deletePart(Part Part)
+        {
+            AllParts.Remove(Part);
+            return true;
+        }
+
+
+
+        // takes int as input and reuturns Part
+        public Part LookupPart(int PartID)
+        {
+            foreach (var element in AllParts)
+            {
+                if (PartID == element.PartID)
+                {
+                    return element;
+                }
+            }
+            return null;
+        }
+
+        public void UpdatePart(int partid, Part part)
+        {
+            //Updating Part
+
+            foreach (var Part in AllParts){
+                if (Part.PartID == partid)
+                {
+                    Part.PartID = part.PartID;
+                    Part.Name = part.Name;
+                    Part.Price = part.Price;
+                    Part.InStock = part.InStock;
+                    Part.Min = part.Min;
+                    Part.Max = part.Max;
+                }
+            }
+            
+            
+
+
+
+        }
+        }
+    }
+
+        

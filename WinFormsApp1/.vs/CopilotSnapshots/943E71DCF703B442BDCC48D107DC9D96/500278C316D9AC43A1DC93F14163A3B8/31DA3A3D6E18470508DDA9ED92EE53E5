@@ -1,0 +1,70 @@
+﻿namespace WinFormsApp1
+{
+    using System.ComponentModel;
+    using System.Windows.Forms;
+    using System.Linq;
+
+    public class Inventory
+    {
+        
+
+        public BindingList<Product> Products { get; set; } = new BindingList<Product>();
+        public BindingList<Part> AllParts { get; set; } = new BindingList<Part>();
+
+
+        public void addProduct(Product Product)
+        {
+            
+        }
+
+        public bool removeProduct(int Product)
+        {
+            return true;
+        }
+
+        public int lookProduct(Product product)
+        {
+            return 1;
+        }
+
+        public void updateProduct(int x, Product product) { }
+
+
+        // Making Add Part method we need to get the data form text boxes in form 2
+        public  void addPart(Part Part) {
+
+            var newPart = new Part();
+            newPart.PartID = Part.PartID;
+            newPart.Name = Part.Name;
+            newPart.Price = Part.Price;
+            newPart.InStock = Part.InStock;
+            newPart.Min = Part.Min;
+            newPart.Max = Part.Max;
+            AllParts.Add(newPart);
+        }
+
+        public bool deletePart(Part Part)
+        {
+            return true;
+        }
+
+        public int LookupPart(int PartID)
+        {
+            // Find all parts that match the requested ID and move them to the top
+            var matches = AllParts.Where(p => p.PartID == PartID).ToList();
+            if (!matches.Any()) return -1;
+
+            var others = AllParts.Where(p => p.PartID != PartID).ToList();
+
+            AllParts.Clear();
+            // add matches first so they appear at the top in the same order
+            foreach (var m in matches) AllParts.Add(m);
+            foreach (var o in others) AllParts.Add(o);
+
+            // return index of first matching element (0 since moved to top)
+            return 0;
+        }
+
+        public void updatePart(int x, Part Part) { }
+    }
+}
