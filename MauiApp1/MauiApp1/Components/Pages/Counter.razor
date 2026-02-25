@@ -1,0 +1,33 @@
+﻿@page "/counter"
+
+<h1>Counter</h1>
+
+<p role="status">Current count: @currentCount</p>
+
+<span id="change_me!">@spanContent</span>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+<button @onclick="My_Func">This will change the text</button>
+
+
+<img src="images/dotnet_bot.svg" alt="as;dlfkajsd" />
+@code {
+    private int currentCount = 0;
+
+    private void IncrementCount()
+    {
+        currentCount++;
+    }
+}
+
+
+
+@code {
+    private string spanContent = "Do i change?";
+
+    private void My_Func()
+    {
+        spanContent = "Changed";
+    }
+    };
+    

@@ -1,0 +1,99 @@
+﻿@page "/"
+@using MauiApp1.Services
+@inject DataService DataService
+using MauiApp1.Personel
+
+<h1>Watchbill</h1>
+<h2>SDO</h2>
+<h2>DCPO</h2>
+
+
+<aside style="float:right;">
+    <table>
+        <tr>
+            <th>Colors</th>
+        </tr>
+        <tr>
+            <td>Moring</td>
+            <td>Evening</td>
+            
+        </tr>
+        <tr>
+        <td>Morn</td>
+        <td>Eve</td>
+        </tr>
+        
+        <tr>
+        <td>Morn</td>
+        <td>Eve</td>
+        </tr>
+    </table>
+</aside>
+
+<table id="watchbill" width="70%">
+    <tr>
+    <th>Time</th>
+    <th>Senior</th>
+    <th>mid</th>
+    <th>Junior</th>
+        <th>Senior</th>
+        <th>mid</th>
+        <th>Junior</th>
+    </tr>
+    <tr>
+        <td>800-1200</td>
+        <td>Mike</td>
+        <td>Holla</td>
+        <td>John</td>
+        <td>water</td>
+        <td>smoke</td>
+        <td>himerdinger</td>
+    </tr>
+    
+</table>
+
+
+<aside style="float:right;">
+    <table>
+        <tr>
+            <th>Numbers</th>
+        </tr>
+    </table>
+</aside>
+
+
+
+
+<br style="margin-top:20px;">
+<table id="personel">
+    <caption>Personel</caption>
+    <tr>
+        <th>Name</th>
+        <th>Rank</th>
+        <th>Q</th>
+        <th>Lib/Month</th>
+    </tr>
+    <tr>
+        <td>Mike</td>
+        <td>LW2</td>
+        <td>RF, T,P,W,</td>
+        <td>3</td>
+    </tr>
+</table>
+
+@code 
+{
+    Personel.Personel tempPerson = new Personel.Personel();
+
+    List<Personel.Personel> holdingList;
+
+    protected override async Task OnInitializedAsync()
+    {
+        holdingList = await DataService.GetAllPersonelAsync();
+    }
+
+    
+
+    
+
+}

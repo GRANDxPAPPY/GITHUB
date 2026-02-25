@@ -1,0 +1,184 @@
+using SQLite;
+using MauiApp1.TextFile1;  // ← FIX THIS: Change from Maui.App1.Personel to MauiApp1.TextFile1
+
+namespace MauiApp1.Services
+{ 
+    public class DataService
+    {
+        // ==============================================
+        // PRIVATE FIELD - Database Connection
+        // ==============================================
+        // WHY: This holds our connection to the database file
+        // WHY private: Only this class should access it directly
+        // WHY null initially: We create it lazily (only when needed) in Init()
+        private SQLiteAsyncConnection _database;
+
+        // ==============================================
+        // INIT METHOD - Sets up the database
+        // ==============================================
+        // WHY private: Only methods inside this class need to call it
+        // WHY async Task: Database operations take time, so we don't freeze the UI
+        // WHY no return value (Task): We're just doing setup, not returning data
+        private async Task Init()
+        {
+            // ----------------------------------------------
+            // CHECK: Already initialized?
+            // ----------------------------------------------
+            // WHY: Init() gets called EVERY time you use the database
+            // WHY this check: We only want to create the connection ONCE
+            // WHY _database != null: If it's already created, skip all this
+            if (_database != null)
+                return;  // Exit early, we're done!
+
+            // ----------------------------------------------
+            // STEP 1: Build the path to the database file
+            // ----------------------------------------------
+            // WHY FileSystem.AppDataDirectory: 
+            //   - Special folder where apps can save files
+            //   - Different on each platform (Android, iOS, Windows)
+            //   - Example Windows: C:\Users\YourName\AppData\Local\Packages\...\LocalState
+            //   - Your app has permission to write here
+            // WHY Path.Combine: 
+            //   - Safely joins folder path + filename
+            //   - Handles slashes correctly (\ on Windows, / on Mac/Android)
+            // WHY "watchbill.db": 
+            //   - The filename of your database
+            //   - .db extension is convention for SQLite databases
+            var dbPath = Path.Combine(FileSystem.AppDataDirectory, "watchbill.db");
+            
+            // ----------------------------------------------
+            // STEP 2: Create/Open the database connection
+            // ----------------------------------------------
+            // WHY new SQLiteAsyncConnection(dbPath):
+            //   - If watchbill.db doesn't exist → SQLite creates it
+            //   - If watchbill.db already exists → SQLite opens it
+            //   - This is your "phone line" to the database
+            // WHY Async: 
+            //   - Database operations happen in the background
+            //   - Your UI stays responsive (no freezing)
+            _database = new SQLiteAsyncConnection(dbPath);
+            
+            // ----------------------------------------------
+            // STEP 3: Create the Personel table if needed
+            // ----------------------------------------------
+            // WHY CreateTableAsync<Personel>():
+            //   - Looks at your Personel class
+            //   - Reads the [PrimaryKey, AutoIncrement] attributes
+            //   - Generates SQL: CREATE TABLE IF NOT EXISTS Personel (...)
+            //   - Creates columns matching your properties (ID, Name, Rank, Quals)
+            // WHY <Personel>: 
+            //   - Generic type parameter - tells it which class to use
+            //   - Could create other tables: CreateTableAsync<WatchSchedule>()
+            // WHY await:
+            //   - Waits for the table creation to finish
+            //   - Doesn't continue until it's done
+            // WHY safe to call multiple times:
+            //   - If table exists, does nothing
+            //   - If table doesn't exist, creates it
+            await _database.CreateTableAsync<Personel>();
+        }
+
+        // ==============================================
+        // GET ALL PEOPLE - Read from database
+        // ==============================================
+        // WHY public: Other parts of your app need to call this
+        // WHY async Task<List<Personel>>: 
+        //   - async: Takes time, don't freeze UI
+        //   - Task: Returns something when done
+        //   - List<Personel>: Returns a list of Personel objects
+        public async Task<List<Personel>> GetAllPersonelAsync()
+        {
+            // WHY await Init(): 
+            //   - Make sure database is ready before using it
+            //   - First time: Creates database and table
+            //   - Later times: Init() sees _database != null and exits immediately
+            await Init();
+            
+            // WHY _database.Table<Personel>():
+            //   - Points to the Personel table
+            //   - Like saying "SELECT * FROM Personel"
+            // WHY .ToListAsync():
+            //   - Executes the query
+            //   - Converts database rows → List<Personel> objects
+            //   - Each row becomes a Personel object with properties filled in
+            // WHY await:
+            //   - Wait for the database to return all the rows
+            // WHY return:
+            //   - Give back the list to whoever called this method
+            //   - Example usage: var people = await GetAllPersonelAsync();
+            return await _database.Table<Personel>().ToListAsync();
+        }
+
+        // ==============================================
+        // ADD A PERSON - Insert into database
+        // ==============================================
+        // WHY public: So your pages can add new people
+        // WHY async Task<int>:
+        //   - Returns the number of rows inserted (usually 1)
+        //   - int tells you if it worked (1 = success, 0 = failed)
+        // WHY Personel person parameter:
+        //   - You pass in the person object you want to save
+        //   - Example: new Personel { Name = "John", Rank = "E-5" }
+        public async Task<int> AddPersonelAsync(Personel person)
+        {
+            await Init();  // Make sure database is ready
+            
+            // WHY InsertAsync(person):
+            //   - Takes your Personel object
+            //   - Generates SQL: INSERT INTO Personel (Name, Rank, Quals) VALUES (...)
+            //   - Notice it SKIPS ID because of [AutoIncrement]
+            //   - SQLite automatically assigns the next ID number (1, 2, 3, etc.)
+            //   - Saves the data to the database file on disk
+            // WHY await:
+            //   - Wait for the insert to complete
+            // WHY return:
+            //   - Returns number of rows inserted
+            //   - 1 = success, person was added
+            //   - 0 = failed, something went wrong
+            return await _database.InsertAsync(person);
+        }
+
+        // ==============================================
+        // UPDATE A PERSON - Modify existing row
+        // ==============================================
+        // WHY public: So you can edit people later
+        // WHY takes a Personel object:
+        //   - Must have the ID set to know WHICH person to update
+        //   - Example: person.ID = 5, person.Name = "New Name"
+        public async Task<int> UpdatePersonelAsync(Personel person)
+        {
+            await Init();
+            
+            // WHY UpdateAsync(person):
+            //   - Uses person.ID to find the right row
+            //   - Generates SQL: UPDATE Personel SET Name=..., Rank=... WHERE ID=...
+            //   - Updates all the fields with new values
+            //   - Saves changes to database file
+            // WHY return int:
+            //   - Number of rows updated (should be 1)
+            //   - 0 = person with that ID not found
+            return await _database.UpdateAsync(person);
+        }
+
+        // ==============================================
+        // DELETE A PERSON - Remove from database
+        // ==============================================
+        // WHY public: So you can remove people
+        // WHY takes Personel object:
+        //   - Uses the ID to know which person to delete
+        public async Task<int> DeletePersonelAsync(Personel person)
+        {
+            await Init();
+            
+            // WHY DeleteAsync(person):
+            //   - Uses person.ID to find the row
+            //   - Generates SQL: DELETE FROM Personel WHERE ID=...
+            //   - Permanently removes that row from the database
+            //   - Can't be undone!
+            // WHY return int:
+            //   - Number of rows deleted (should be 1)
+            //   - 0 = person with that ID not found
+            return await _database.DeleteAsync(person);
+        }
+    }
+}
