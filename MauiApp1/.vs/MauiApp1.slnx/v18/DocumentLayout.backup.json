@@ -15,6 +15,10 @@
       "RelativeMoniker": "D:0:0:{DBB709D5-80F0-EE7D-A2D1-7D84BC5D452F}|MauiApp1\\MauiApp1.csproj|solutionrelative:mauiapp1\\personel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{DBB709D5-80F0-EE7D-A2D1-7D84BC5D452F}|MauiApp1\\MauiApp1.csproj|c:\\users\\brysi\\github\\mauiapp1\\mauiapp1\\components\\pages\\counter.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{DBB709D5-80F0-EE7D-A2D1-7D84BC5D452F}|MauiApp1\\MauiApp1.csproj|solutionrelative:mauiapp1\\components\\pages\\counter.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{DBB709D5-80F0-EE7D-A2D1-7D84BC5D452F}|MauiApp1\\MauiApp1.csproj|c:\\users\\brysi\\github\\mauiapp1\\mauiapp1\\mauiprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DBB709D5-80F0-EE7D-A2D1-7D84BC5D452F}|MauiApp1\\MauiApp1.csproj|solutionrelative:mauiapp1\\mauiprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -26,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,13 +42,38 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Home.razor",
+              "DocumentMoniker": "C:\\Users\\brysi\\GITHUB\\MauiApp1\\MauiApp1\\Components\\Pages\\Home.razor",
+              "RelativeDocumentMoniker": "MauiApp1\\Components\\Pages\\Home.razor",
+              "ToolTip": "C:\\Users\\brysi\\GITHUB\\MauiApp1\\MauiApp1\\Components\\Pages\\Home.razor",
+              "RelativeToolTip": "MauiApp1\\Components\\Pages\\Home.razor",
+              "ViewState": "AgIAAFcAAAAAAAAAAAAAAG0AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-02-21T01:58:29.046Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Counter.razor",
+              "DocumentMoniker": "C:\\Users\\brysi\\GITHUB\\MauiApp1\\MauiApp1\\Components\\Pages\\Counter.razor",
+              "RelativeDocumentMoniker": "MauiApp1\\Components\\Pages\\Counter.razor",
+              "ToolTip": "C:\\Users\\brysi\\GITHUB\\MauiApp1\\MauiApp1\\Components\\Pages\\Counter.razor",
+              "RelativeToolTip": "MauiApp1\\Components\\Pages\\Counter.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-02-25T01:38:05.5Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 2,
               "Title": "Personel.cs",
               "DocumentMoniker": "C:\\Users\\brysi\\GITHUB\\MauiApp1\\MauiApp1\\Personel.cs",
               "RelativeDocumentMoniker": "MauiApp1\\Personel.cs",
               "ToolTip": "C:\\Users\\brysi\\GITHUB\\MauiApp1\\MauiApp1\\Personel.cs",
               "RelativeToolTip": "MauiApp1\\Personel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-25T00:35:00.669Z"
             },
@@ -56,13 +85,13 @@
               "RelativeDocumentMoniker": "MauiApp1\\Services\\DataService.cs",
               "ToolTip": "C:\\Users\\brysi\\GITHUB\\MauiApp1\\MauiApp1\\Services\\DataService.cs",
               "RelativeToolTip": "MauiApp1\\Services\\DataService.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAxwBoAAAAZAAAAAAAAAA==",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAgwB8AAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-24T23:44:45.915Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "MauiProgram.cs",
               "DocumentMoniker": "C:\\Users\\brysi\\GITHUB\\MauiApp1\\MauiApp1\\MauiProgram.cs",
               "RelativeDocumentMoniker": "MauiApp1\\MauiProgram.cs",
@@ -71,19 +100,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-24T23:54:54.994Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Home.razor",
-              "DocumentMoniker": "C:\\Users\\brysi\\GITHUB\\MauiApp1\\MauiApp1\\Components\\Pages\\Home.razor",
-              "RelativeDocumentMoniker": "MauiApp1\\Components\\Pages\\Home.razor",
-              "ToolTip": "C:\\Users\\brysi\\GITHUB\\MauiApp1\\MauiApp1\\Components\\Pages\\Home.razor",
-              "RelativeToolTip": "MauiApp1\\Components\\Pages\\Home.razor",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-02-21T01:58:29.046Z",
-              "EditorCaption": ""
             }
           ]
         }

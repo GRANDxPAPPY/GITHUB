@@ -1,7 +1,4 @@
 <Solution>
-  <Folder Name="/SERVICES/">
-    <File Path="DataService.cs" />
-  </Folder>
   <Folder Name="/Solution Items/" />
   <Project Path="MauiApp1/MauiApp1.csproj">
     <Deploy Solution="Debug|*" />

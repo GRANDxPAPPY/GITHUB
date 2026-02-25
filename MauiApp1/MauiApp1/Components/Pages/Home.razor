@@ -1,7 +1,8 @@
 ﻿@page "/"
 @using MauiApp1.Services
 @inject DataService DataService
-using MauiApp1.Personel
+@using MauiApp1.Personel
+
 
 <h1>Watchbill</h1>
 <h2>SDO</h2>
@@ -42,7 +43,7 @@ using MauiApp1.Personel
     </tr>
     <tr>
         <td>800-1200</td>
-        <td>Mike</td>
+        <td>filler person</td>
         <td>Holla</td>
         <td>John</td>
         <td>water</td>
@@ -73,27 +74,38 @@ using MauiApp1.Personel
         <th>Q</th>
         <th>Lib/Month</th>
     </tr>
-    <tr>
-        <td>Mike</td>
-        <td>LW2</td>
-        <td>RF, T,P,W,</td>
-        <td>3</td>
-    </tr>
+    @if (holdingList != null && holdingList.Any())
+    {
+        foreach (var person in holdingList)
+        {
+            <tr>
+                <td>@person.Name</td>
+                <td>@person.Rank</td>
+                <td>@person.Quals</td>
+                <td>@person.Lib</td>
+            </tr>
+        }
+    }
+
+    <!--<p>@dbpath</p>-->
+       
+    
 </table>
 
 @code 
 {
-    Personel.Personel tempPerson = new Personel.Personel();
+    Personel tempPerson = new Personel();
 
-    List<Personel.Personel> holdingList;
+    List<Personel> holdingList;
+
+    string dbpath;
 
     protected override async Task OnInitializedAsync()
     {
         holdingList = await DataService.GetAllPersonelAsync();
+
+        dbpath = await DataService.GetDataPath();
+
+
     }
-
-    
-
-    
-
 }

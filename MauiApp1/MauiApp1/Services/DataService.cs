@@ -16,12 +16,21 @@ namespace MauiApp1.Services
 
             var dbPath = Path.Combine(FileSystem.AppDataDirectory, "watchbill.db");
 
-
+       
             _database = new SQLiteAsyncConnection(dbPath);
 
             await _database.CreateTableAsync<Personel.Personel>();
         }
 
+
+
+        public async Task<string> GetDataPath()
+        {
+            await Init();
+
+            var dbpath = Path.Combine(FileSystem.AppDataDirectory, "watchbill.db");
+            return dbpath;
+        }
         public async Task<List<Personel.Personel>> GetAllPersonelAsync()
         {
             await Init();

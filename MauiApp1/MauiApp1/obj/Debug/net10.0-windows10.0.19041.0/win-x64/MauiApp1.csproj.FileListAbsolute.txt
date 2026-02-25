@@ -577,7 +577,6 @@ C:\Users\brysi\WGU\C#2\MauiApp1\MauiApp1\bin\Debug\net10.0-windows10.0.19041.0\w
 C:\Users\brysi\WGU\C#2\MauiApp1\MauiApp1\bin\Debug\net10.0-windows10.0.19041.0\win-x64\Watchbill.db
 C:\Users\brysi\GITHUB\MauiApp1\MauiApp1\bin\Debug\net10.0-windows10.0.19041.0\win-x64\Platforms\Windows\App.xbf
 C:\Users\brysi\GITHUB\MauiApp1\MauiApp1\bin\Debug\net10.0-windows10.0.19041.0\win-x64\AboutAssets.txt
-C:\Users\brysi\GITHUB\MauiApp1\MauiApp1\bin\Debug\net10.0-windows10.0.19041.0\win-x64\Watchbill.db
 C:\Users\brysi\GITHUB\MauiApp1\MauiApp1\bin\Debug\net10.0-windows10.0.19041.0\win-x64\wwwroot\_framework\blazor.modules.json
 C:\Users\brysi\GITHUB\MauiApp1\MauiApp1\bin\Debug\net10.0-windows10.0.19041.0\win-x64\wwwroot\_framework\blazor.webview.js
 C:\Users\brysi\GITHUB\MauiApp1\MauiApp1\bin\Debug\net10.0-windows10.0.19041.0\win-x64\wwwroot\MauiApp1.styles.css
