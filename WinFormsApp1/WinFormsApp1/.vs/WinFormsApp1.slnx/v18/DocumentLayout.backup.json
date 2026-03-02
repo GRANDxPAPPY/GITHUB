@@ -54,11 +54,12 @@
               "Title": "Form1.cs [Design]",
               "DocumentMoniker": "C:\\Users\\brysi\\WGU\\C968 C#\\ref\\WinFormsApp1\\WinFormsApp1\\Form1.cs",
               "RelativeDocumentMoniker": "WinFormsApp1\\Form1.cs",
-              "ToolTip": "C:\\Users\\brysi\\WGU\\C968 C#\\ref\\WindowsFormsApp1\\WinFormsApp1\\WinFormsApp1\\Form1.cs [Design]",
-              "RelativeToolTip": "..\\WindowsFormsApp1\\WinFormsApp1\\WinFormsApp1\\Form1.cs [Design]",
+              "ToolTip": "C:\\Users\\brysi\\WGU\\C968 C#\\ref\\WinFormsApp1\\WinFormsApp1\\Form1.cs [Design]",
+              "RelativeToolTip": "WinFormsApp1\\Form1.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-07T02:01:35.629Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
@@ -66,11 +67,12 @@
               "Title": "Form2.cs [Design]",
               "DocumentMoniker": "C:\\Users\\brysi\\WGU\\C968 C#\\ref\\WinFormsApp1\\WinFormsApp1\\Form2.cs",
               "RelativeDocumentMoniker": "WinFormsApp1\\Form2.cs",
-              "ToolTip": "C:\\Users\\brysi\\WGU\\C968 C#\\ref\\WindowsFormsApp1\\WinFormsApp1\\WinFormsApp1\\Form2.cs [Design]",
-              "RelativeToolTip": "..\\WindowsFormsApp1\\WinFormsApp1\\WinFormsApp1\\Form2.cs [Design]",
+              "ToolTip": "C:\\Users\\brysi\\WGU\\C968 C#\\ref\\WinFormsApp1\\WinFormsApp1\\Form2.cs [Design]",
+              "RelativeToolTip": "WinFormsApp1\\Form2.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-06T20:41:41.245Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
@@ -136,7 +138,8 @@
               "RelativeToolTip": "WinFormsApp1\\Inventory.cs",
               "ViewState": "AgIAACQAAAAAAAAAAAAAACYAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-14T19:26:37.619Z"
+              "WhenOpened": "2025-12-14T19:26:37.619Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
