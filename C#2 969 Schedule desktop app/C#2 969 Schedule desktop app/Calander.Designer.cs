@@ -1,6 +1,6 @@
 ﻿namespace C_2_969_Schedule_desktop_app
 {
-    partial class Form1
+    partial class Calander
     {
         /// <summary>
         /// Required designer variable.
@@ -37,4 +37,3 @@
         #endregion
     }
 }
-

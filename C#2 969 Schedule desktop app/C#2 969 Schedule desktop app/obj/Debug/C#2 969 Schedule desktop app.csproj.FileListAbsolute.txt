@@ -1,0 +1,11 @@
+C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\obj\Debug\C#2 969 Schedule desktop app.csproj.AssemblyReference.cache
+C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\obj\Debug\C_2_969_Schedule_desktop_app.CustomerRecords.resources
+C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\obj\Debug\C_2_969_Schedule_desktop_app.Login.resources
+C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\obj\Debug\C_2_969_Schedule_desktop_app.Properties.Resources.resources
+C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\obj\Debug\C#2 969 Schedule desktop app.csproj.GenerateResource.cache
+C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\obj\Debug\C#2 969 Schedule desktop app.csproj.CoreCompileInputs.cache
+C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\bin\Debug\C#2 969 Schedule desktop app.exe.config
+C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\bin\Debug\C#2 969 Schedule desktop app.exe
+C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\bin\Debug\C#2 969 Schedule desktop app.pdb
+C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\obj\Debug\C#2 969 Schedule desktop app.exe
+C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\obj\Debug\C#2 969 Schedule desktop app.pdb
