@@ -38,6 +38,8 @@
             this.addUserRecordButton = new System.Windows.Forms.Button();
             this.updateUserRecordButton = new System.Windows.Forms.Button();
             this.deleteUserRecordButton = new System.Windows.Forms.Button();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // customerNameLabel
@@ -86,7 +88,6 @@
             this.customerNameTextbox.Name = "customerNameTextbox";
             this.customerNameTextbox.Size = new System.Drawing.Size(250, 20);
             this.customerNameTextbox.TabIndex = 4;
-            this.customerNameTextbox.TextChanged += new System.EventHandler(this.customerNameTextbox_TextChanged);
             // 
             // customerAddressTextbox
             // 
@@ -94,7 +95,6 @@
             this.customerAddressTextbox.Name = "customerAddressTextbox";
             this.customerAddressTextbox.Size = new System.Drawing.Size(250, 20);
             this.customerAddressTextbox.TabIndex = 5;
-            this.customerAddressTextbox.TextChanged += new System.EventHandler(this.customerAddressTextbox_TextChanged);
             // 
             // customerPhoneNumberTextbox
             // 
@@ -102,7 +102,6 @@
             this.customerPhoneNumberTextbox.Name = "customerPhoneNumberTextbox";
             this.customerPhoneNumberTextbox.Size = new System.Drawing.Size(250, 20);
             this.customerPhoneNumberTextbox.TabIndex = 6;
-            this.customerPhoneNumberTextbox.TextChanged += new System.EventHandler(this.customerPhoneNumberTextbox_TextChanged);
             // 
             // addUserRecordButton
             // 
@@ -112,6 +111,7 @@
             this.addUserRecordButton.TabIndex = 11;
             this.addUserRecordButton.Text = "Add";
             this.addUserRecordButton.UseVisualStyleBackColor = true;
+            this.addUserRecordButton.Click += new System.EventHandler(this.addUserRecordButton_Click);
             // 
             // updateUserRecordButton
             // 
@@ -121,6 +121,7 @@
             this.updateUserRecordButton.TabIndex = 12;
             this.updateUserRecordButton.Text = "Update";
             this.updateUserRecordButton.UseVisualStyleBackColor = true;
+            this.updateUserRecordButton.Click += new System.EventHandler(this.updateUserRecordButton_Click);
             // 
             // deleteUserRecordButton
             // 
@@ -130,13 +131,23 @@
             this.deleteUserRecordButton.TabIndex = 13;
             this.deleteUserRecordButton.Text = "Delete";
             this.deleteUserRecordButton.UseVisualStyleBackColor = true;
+            this.deleteUserRecordButton.Click += new System.EventHandler(this.deleteUserRecordButton_Click);
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(770, 105);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(689, 443);
+            this.dataGridView1.TabIndex = 14;
             // 
             // CustomerRecords
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(908, 408);
+            this.ClientSize = new System.Drawing.Size(1505, 634);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.deleteUserRecordButton);
             this.Controls.Add(this.updateUserRecordButton);
             this.Controls.Add(this.addUserRecordButton);
@@ -149,6 +160,7 @@
             this.Controls.Add(this.customerNameLabel);
             this.Name = "CustomerRecords";
             this.Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -166,5 +178,6 @@
         private System.Windows.Forms.Button addUserRecordButton;
         private System.Windows.Forms.Button updateUserRecordButton;
         private System.Windows.Forms.Button deleteUserRecordButton;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }

@@ -22,6 +22,10 @@ namespace C_2_969_Schedule_desktop_app
 
         }
 
-        
+        private void submitButton_Click(object sender, EventArgs e)
+        {
+            var x = new  CustomerRecords();
+            x.ShowDialog();
+        }
     }
 }
