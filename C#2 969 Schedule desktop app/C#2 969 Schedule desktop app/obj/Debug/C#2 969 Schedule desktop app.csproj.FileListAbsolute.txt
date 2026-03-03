@@ -9,3 +9,5 @@ C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule deskt
 C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\bin\Debug\C#2 969 Schedule desktop app.pdb
 C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\obj\Debug\C#2 969 Schedule desktop app.exe
 C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\obj\Debug\C#2 969 Schedule desktop app.pdb
+C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\obj\Debug\C_2_969_Schedule_desktop_app.Appointments.resources
+C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\obj\Debug\C_2_969_Schedule_desktop_app.Calander.resources

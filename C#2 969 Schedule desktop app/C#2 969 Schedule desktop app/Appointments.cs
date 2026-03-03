@@ -16,5 +16,10 @@ namespace C_2_969_Schedule_desktop_app
         {
             InitializeComponent();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

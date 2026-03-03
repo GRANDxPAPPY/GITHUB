@@ -74,6 +74,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Appointments.resx">
+      <DependentUpon>Appointments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Calander.resx">
+      <DependentUpon>Calander.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CustomerRecords.resx">
       <DependentUpon>CustomerRecords.cs</DependentUpon>
     </EmbeddedResource>

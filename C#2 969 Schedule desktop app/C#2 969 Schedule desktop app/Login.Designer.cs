@@ -32,6 +32,9 @@
             this.loginLabel = new System.Windows.Forms.Label();
             this.usernameLabel = new System.Windows.Forms.Label();
             this.passwordLabel = new System.Windows.Forms.Label();
+            this.userNameTextbox = new System.Windows.Forms.TextBox();
+            this.passwordTextBox = new System.Windows.Forms.TextBox();
+            this.submitButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // helloLabel
@@ -73,12 +76,38 @@
             this.passwordLabel.TabIndex = 3;
             this.passwordLabel.Text = "Password:";
             // 
+            // userNameTextbox
+            // 
+            this.userNameTextbox.Location = new System.Drawing.Point(442, 285);
+            this.userNameTextbox.Name = "userNameTextbox";
+            this.userNameTextbox.Size = new System.Drawing.Size(268, 20);
+            this.userNameTextbox.TabIndex = 4;
+            // 
+            // passwordTextBox
+            // 
+            this.passwordTextBox.Location = new System.Drawing.Point(445, 326);
+            this.passwordTextBox.Name = "passwordTextBox";
+            this.passwordTextBox.Size = new System.Drawing.Size(265, 20);
+            this.passwordTextBox.TabIndex = 5;
+            // 
+            // submitButton
+            // 
+            this.submitButton.Location = new System.Drawing.Point(554, 371);
+            this.submitButton.Name = "submitButton";
+            this.submitButton.Size = new System.Drawing.Size(75, 23);
+            this.submitButton.TabIndex = 6;
+            this.submitButton.Text = "submit";
+            this.submitButton.UseVisualStyleBackColor = true;
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1625, 814);
+            this.ClientSize = new System.Drawing.Size(1206, 596);
+            this.Controls.Add(this.submitButton);
+            this.Controls.Add(this.passwordTextBox);
+            this.Controls.Add(this.userNameTextbox);
             this.Controls.Add(this.passwordLabel);
             this.Controls.Add(this.usernameLabel);
             this.Controls.Add(this.loginLabel);
@@ -96,6 +125,9 @@
         private System.Windows.Forms.Label loginLabel;
         private System.Windows.Forms.Label usernameLabel;
         private System.Windows.Forms.Label passwordLabel;
+        private System.Windows.Forms.TextBox userNameTextbox;
+        private System.Windows.Forms.TextBox passwordTextBox;
+        private System.Windows.Forms.Button submitButton;
     }
 }
 
