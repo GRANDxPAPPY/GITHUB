@@ -34,11 +34,11 @@
             this.customerRecordsLabel = new System.Windows.Forms.Label();
             this.customerNameTextbox = new System.Windows.Forms.TextBox();
             this.customerAddressTextbox = new System.Windows.Forms.TextBox();
-            this.customerPhoneNumberTextbox = new System.Windows.Forms.TextBox();
             this.addUserRecordButton = new System.Windows.Forms.Button();
             this.updateUserRecordButton = new System.Windows.Forms.Button();
             this.deleteUserRecordButton = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.customerPhoneNumberTextbox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -96,13 +96,6 @@
             this.customerAddressTextbox.Size = new System.Drawing.Size(250, 20);
             this.customerAddressTextbox.TabIndex = 5;
             // 
-            // customerPhoneNumberTextbox
-            // 
-            this.customerPhoneNumberTextbox.Location = new System.Drawing.Point(226, 209);
-            this.customerPhoneNumberTextbox.Name = "customerPhoneNumberTextbox";
-            this.customerPhoneNumberTextbox.Size = new System.Drawing.Size(250, 20);
-            this.customerPhoneNumberTextbox.TabIndex = 6;
-            // 
             // addUserRecordButton
             // 
             this.addUserRecordButton.Location = new System.Drawing.Point(537, 121);
@@ -141,6 +134,13 @@
             this.dataGridView1.Size = new System.Drawing.Size(689, 443);
             this.dataGridView1.TabIndex = 14;
             // 
+            // customerPhoneNumberTextbox
+            // 
+            this.customerPhoneNumberTextbox.Location = new System.Drawing.Point(226, 209);
+            this.customerPhoneNumberTextbox.Name = "customerPhoneNumberTextbox";
+            this.customerPhoneNumberTextbox.Size = new System.Drawing.Size(250, 20);
+            this.customerPhoneNumberTextbox.TabIndex = 6;
+            // 
             // CustomerRecords
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -174,10 +174,10 @@
         private System.Windows.Forms.Label customerRecordsLabel;
         private System.Windows.Forms.TextBox customerNameTextbox;
         private System.Windows.Forms.TextBox customerAddressTextbox;
-        private System.Windows.Forms.TextBox customerPhoneNumberTextbox;
         private System.Windows.Forms.Button addUserRecordButton;
         private System.Windows.Forms.Button updateUserRecordButton;
         private System.Windows.Forms.Button deleteUserRecordButton;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.TextBox customerPhoneNumberTextbox;
     }
 }

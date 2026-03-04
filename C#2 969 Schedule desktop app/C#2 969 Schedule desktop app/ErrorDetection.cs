@@ -11,15 +11,21 @@ namespace C_2_969_Schedule_desktop_app
     {
         public static bool IsEmpty(string userString)
         {
-            if (String.IsNullOrWhiteSpace(userString))
-            {
+            
+            
+                if (String.IsNullOrWhiteSpace(userString))
+                {
 
-                MessageBox.Show("All fields must be filled before any submission");
-                return true;
-            }
-            else {
-                return false;
-            }
+                    MessageBox.Show("All fields must be filled before any submission");
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            
+
+            
         }
 
         public static void CorrectFormat(string phoneNumber)

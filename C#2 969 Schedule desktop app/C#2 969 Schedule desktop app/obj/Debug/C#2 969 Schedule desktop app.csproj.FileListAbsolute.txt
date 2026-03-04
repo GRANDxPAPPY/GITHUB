@@ -11,3 +11,34 @@ C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule deskt
 C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\obj\Debug\C#2 969 Schedule desktop app.pdb
 C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\obj\Debug\C_2_969_Schedule_desktop_app.Appointments.resources
 C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\obj\Debug\C_2_969_Schedule_desktop_app.Calander.resources
+C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\bin\Debug\BouncyCastle.Cryptography.dll
+C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\bin\Debug\Google.Protobuf.dll
+C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\bin\Debug\K4os.Compression.LZ4.dll
+C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\bin\Debug\K4os.Compression.LZ4.Streams.dll
+C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\bin\Debug\K4os.Hash.xxHash.dll
+C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\bin\Debug\MySql.Data.dll
+C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\bin\Debug\System.Buffers.dll
+C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\bin\Debug\System.Configuration.ConfigurationManager.dll
+C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\bin\Debug\System.IO.Pipelines.dll
+C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\bin\Debug\System.Memory.dll
+C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\bin\Debug\ZstdSharp.dll
+C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\bin\Debug\BouncyCastle.Cryptography.xml
+C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\bin\Debug\Google.Protobuf.pdb
+C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\bin\Debug\Google.Protobuf.xml
+C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\bin\Debug\K4os.Compression.LZ4.xml
+C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\bin\Debug\K4os.Compression.LZ4.Streams.xml
+C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\bin\Debug\K4os.Hash.xxHash.xml
+C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\bin\Debug\MySql.Data.xml
+C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\bin\Debug\System.Buffers.xml
+C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\bin\Debug\System.Configuration.ConfigurationManager.xml
+C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\bin\Debug\System.IO.Pipelines.xml
+C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\bin\Debug\System.Memory.xml
+C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\obj\Debug\C#2 969 .02074260.Up2Date

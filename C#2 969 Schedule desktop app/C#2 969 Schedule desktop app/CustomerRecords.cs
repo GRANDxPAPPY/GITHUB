@@ -11,13 +11,14 @@ using System.Windows.Forms;
 
 namespace C_2_969_Schedule_desktop_app
 {
-    public partial class CustomerRecords : Form
+    public partial class  CustomerRecords : Form
     {
-        
+        DataService DataService = new DataService();
         
         public CustomerRecords()
         {
             InitializeComponent();
+            
 
         }
 
@@ -43,6 +44,18 @@ namespace C_2_969_Schedule_desktop_app
                 ErrorDetection.CorrectFormat(customerPhoneNumberTextbox.Text);
             }
 
+            var customer = new customer();
+            customer.customerID = 0;
+            customer.customerName = customerNameTextbox.Text;
+            customer.addressID = 0;
+
+            var address = new address();
+            address.phone = customerPhoneNumberTextbox.Text;
+            
+            
+            DataService.AddCustomer(customer, address);
+            
+            
         }
 
         private void updateUserRecordButton_Click(object sender, EventArgs e)

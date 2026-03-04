@@ -21,5 +21,10 @@ namespace C_2_969_Schedule_desktop_app
         {
 
         }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

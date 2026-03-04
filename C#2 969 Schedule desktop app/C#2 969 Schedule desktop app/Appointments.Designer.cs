@@ -39,6 +39,8 @@
             this.deleteAppoinmentUpdateButton = new System.Windows.Forms.Button();
             this.HourMinutesPicker = new System.Windows.Forms.TextBox();
             this.timeAppointmentLabel = new System.Windows.Forms.Label();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // addupdateAppointmentLabel
@@ -89,10 +91,11 @@
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
             this.dateTimePicker1.TabIndex = 6;
+            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
             // addAppointmentButton
             // 
-            this.addAppointmentButton.Location = new System.Drawing.Point(390, 250);
+            this.addAppointmentButton.Location = new System.Drawing.Point(503, 73);
             this.addAppointmentButton.Name = "addAppointmentButton";
             this.addAppointmentButton.Size = new System.Drawing.Size(75, 23);
             this.addAppointmentButton.TabIndex = 7;
@@ -101,7 +104,7 @@
             // 
             // UpdateApointmentButton
             // 
-            this.UpdateApointmentButton.Location = new System.Drawing.Point(503, 250);
+            this.UpdateApointmentButton.Location = new System.Drawing.Point(503, 133);
             this.UpdateApointmentButton.Name = "UpdateApointmentButton";
             this.UpdateApointmentButton.Size = new System.Drawing.Size(75, 23);
             this.UpdateApointmentButton.TabIndex = 8;
@@ -110,7 +113,7 @@
             // 
             // deleteAppoinmentUpdateButton
             // 
-            this.deleteAppoinmentUpdateButton.Location = new System.Drawing.Point(615, 250);
+            this.deleteAppoinmentUpdateButton.Location = new System.Drawing.Point(503, 186);
             this.deleteAppoinmentUpdateButton.Name = "deleteAppoinmentUpdateButton";
             this.deleteAppoinmentUpdateButton.Size = new System.Drawing.Size(75, 23);
             this.deleteAppoinmentUpdateButton.TabIndex = 9;
@@ -134,12 +137,21 @@
             this.timeAppointmentLabel.TabIndex = 11;
             this.timeAppointmentLabel.Text = "Time";
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(659, 59);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(685, 354);
+            this.dataGridView1.TabIndex = 12;
+            // 
             // Appointments
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(802, 354);
+            this.ClientSize = new System.Drawing.Size(1374, 527);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.timeAppointmentLabel);
             this.Controls.Add(this.HourMinutesPicker);
             this.Controls.Add(this.deleteAppoinmentUpdateButton);
@@ -153,6 +165,7 @@
             this.Controls.Add(this.addupdateAppointmentLabel);
             this.Name = "Appointments";
             this.Text = "Form3";
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -171,5 +184,6 @@
         private System.Windows.Forms.Button deleteAppoinmentUpdateButton;
         private System.Windows.Forms.TextBox HourMinutesPicker;
         private System.Windows.Forms.Label timeAppointmentLabel;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }
