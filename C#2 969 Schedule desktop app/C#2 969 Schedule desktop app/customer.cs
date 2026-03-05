@@ -12,5 +12,8 @@ namespace C_2_969_Schedule_desktop_app
         public string customerName { get; set; }
         public int addressID { get; set; }
 
+        public string phone { get; set; }
+
+        public string customerAddress { get; set; }
     }
 }

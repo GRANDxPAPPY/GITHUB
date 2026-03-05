@@ -8,6 +8,7 @@ namespace C_2_969_Schedule_desktop_app
 {
     public class address
     {
+        public string customerAddress { get; set; }
         public int adressId { get; set; }
         public string phone { get; set; }
     }
