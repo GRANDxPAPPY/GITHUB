@@ -39,6 +39,8 @@
             this.deleteUserRecordButton = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.customerPhoneNumberTextbox = new System.Windows.Forms.TextBox();
+            this.appointmentPortalButton = new System.Windows.Forms.Button();
+            this.appointmentPortalLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -149,12 +151,34 @@
             this.customerPhoneNumberTextbox.Size = new System.Drawing.Size(250, 20);
             this.customerPhoneNumberTextbox.TabIndex = 6;
             // 
+            // appointmentPortalButton
+            // 
+            this.appointmentPortalButton.Location = new System.Drawing.Point(226, 318);
+            this.appointmentPortalButton.Name = "appointmentPortalButton";
+            this.appointmentPortalButton.Size = new System.Drawing.Size(75, 23);
+            this.appointmentPortalButton.TabIndex = 15;
+            this.appointmentPortalButton.Text = "Select";
+            this.appointmentPortalButton.UseVisualStyleBackColor = true;
+            this.appointmentPortalButton.Click += new System.EventHandler(this.appointmentPortalButton_Click);
+            // 
+            // appointmentPortalLabel
+            // 
+            this.appointmentPortalLabel.AutoSize = true;
+            this.appointmentPortalLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.appointmentPortalLabel.Location = new System.Drawing.Point(12, 307);
+            this.appointmentPortalLabel.Name = "appointmentPortalLabel";
+            this.appointmentPortalLabel.Size = new System.Drawing.Size(189, 36);
+            this.appointmentPortalLabel.TabIndex = 16;
+            this.appointmentPortalLabel.Text = "Apointments:";
+            // 
             // CustomerRecords
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(1505, 634);
+            this.Controls.Add(this.appointmentPortalLabel);
+            this.Controls.Add(this.appointmentPortalButton);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.deleteUserRecordButton);
             this.Controls.Add(this.updateUserRecordButton);
@@ -188,5 +212,7 @@
         private System.Windows.Forms.Button deleteUserRecordButton;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.TextBox customerPhoneNumberTextbox;
+        private System.Windows.Forms.Button appointmentPortalButton;
+        private System.Windows.Forms.Label appointmentPortalLabel;
     }
 }

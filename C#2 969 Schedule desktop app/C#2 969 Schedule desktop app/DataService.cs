@@ -1,12 +1,13 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using Mysqlx.Prepare;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Configuration;
-using MySql.Data.MySqlClient;
 using System.Windows.Forms;
-using Mysqlx.Prepare;
 
 
 namespace C_2_969_Schedule_desktop_app
@@ -185,6 +186,30 @@ namespace C_2_969_Schedule_desktop_app
             }
         }
 
-        
+        public List<appointmentUI> GetAppointmentUIs()
+        {
+            MySqlConnection Data = new MySqlConnection(pathToData);
+            using (Data) {
+                Data.Open();
+                var returningList = new List<appointmentUI>();
+                //ADD UI CODE HERE
+        //public string customerName { get; set; }
+        //public string Appoinment { get; set; }
+        //public string AppoimentTime { get; set; }
+
+                var mySqlString = "SELECT C.customerName, A.title, A.start FROM customer AS C INNER JOIN appointment as A ON C.customerId = A.customerId";
+                MySqlCommand mySqlCommand = new MySqlCommand(mySqlString,Data);
+                var reader = mySqlCommand.ExecuteReader();
+                while (reader.Read())
+                {
+                    var appointmentUI = new appointmentUI() { customerName = reader["customerName"].ToString(), AppoimentTime = reader["start"].ToString(), Appoinment = reader["title"].ToString() };
+
+                    returningList.Add(appointmentUI);
+                }
+                return returningList;
+            } 
+        }
+
+
     }
 }

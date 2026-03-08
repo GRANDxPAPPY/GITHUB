@@ -32,7 +32,6 @@
             this.appointmentTypeLabel = new System.Windows.Forms.Label();
             this.customerNameLabel = new System.Windows.Forms.Label();
             this.AppointmentTypeTextbox = new System.Windows.Forms.TextBox();
-            this.customerNameTextBox = new System.Windows.Forms.TextBox();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.addAppointmentButton = new System.Windows.Forms.Button();
             this.UpdateApointmentButton = new System.Windows.Forms.Button();
@@ -40,6 +39,7 @@
             this.HourMinutesPicker = new System.Windows.Forms.TextBox();
             this.timeAppointmentLabel = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -77,13 +77,6 @@
             this.AppointmentTypeTextbox.Name = "AppointmentTypeTextbox";
             this.AppointmentTypeTextbox.Size = new System.Drawing.Size(219, 20);
             this.AppointmentTypeTextbox.TabIndex = 4;
-            // 
-            // customerNameTextBox
-            // 
-            this.customerNameTextBox.Location = new System.Drawing.Point(134, 133);
-            this.customerNameTextBox.Name = "customerNameTextBox";
-            this.customerNameTextBox.Size = new System.Drawing.Size(219, 20);
-            this.customerNameTextBox.TabIndex = 5;
             // 
             // dateTimePicker1
             // 
@@ -145,12 +138,22 @@
             this.dataGridView1.Size = new System.Drawing.Size(685, 354);
             this.dataGridView1.TabIndex = 12;
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(134, 130);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(219, 21);
+            this.comboBox1.TabIndex = 13;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
             // Appointments
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(1374, 527);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.timeAppointmentLabel);
             this.Controls.Add(this.HourMinutesPicker);
@@ -158,13 +161,13 @@
             this.Controls.Add(this.UpdateApointmentButton);
             this.Controls.Add(this.addAppointmentButton);
             this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.customerNameTextBox);
             this.Controls.Add(this.AppointmentTypeTextbox);
             this.Controls.Add(this.customerNameLabel);
             this.Controls.Add(this.appointmentTypeLabel);
             this.Controls.Add(this.addupdateAppointmentLabel);
             this.Name = "Appointments";
             this.Text = "Form3";
+            this.Load += new System.EventHandler(this.Appointments_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -177,7 +180,6 @@
         private System.Windows.Forms.Label appointmentTypeLabel;
         private System.Windows.Forms.Label customerNameLabel;
         private System.Windows.Forms.TextBox AppointmentTypeTextbox;
-        private System.Windows.Forms.TextBox customerNameTextBox;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Button addAppointmentButton;
         private System.Windows.Forms.Button UpdateApointmentButton;
@@ -185,5 +187,6 @@
         private System.Windows.Forms.TextBox HourMinutesPicker;
         private System.Windows.Forms.Label timeAppointmentLabel;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
