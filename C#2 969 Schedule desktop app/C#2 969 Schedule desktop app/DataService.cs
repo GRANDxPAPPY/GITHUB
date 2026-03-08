@@ -186,6 +186,33 @@ namespace C_2_969_Schedule_desktop_app
             }
         }
 
+
+        public bool AddAppointment(appointment appointment, customer customer)
+        {
+            MySqlConnection Data = new MySqlConnection(pathToData);
+            try
+            {
+                using (Data)
+                {
+                    Data.Open();
+                    var mySqlString = "INSERT INTO appointment(title,start,customerId) VALUES(@title,@start,@customerId)";
+                    MySqlCommand mySqlCommand = new MySqlCommand(mySqlString, Data);
+                    mySqlCommand.Parameters.AddWithValue("@title", appointment.title);
+                    mySqlCommand.Parameters.AddWithValue("@start", appointment.start);
+                    mySqlCommand.Parameters.AddWithValue("@customerId", customer.customerID);
+                    mySqlCommand.ExecuteNonQuery();
+                    
+
+                    
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+                
+            }
+        }
         public List<appointmentUI> GetAppointmentUIs()
         {
             MySqlConnection Data = new MySqlConnection(pathToData);
@@ -197,12 +224,12 @@ namespace C_2_969_Schedule_desktop_app
         //public string Appoinment { get; set; }
         //public string AppoimentTime { get; set; }
 
-                var mySqlString = "SELECT C.customerName, A.title, A.start FROM customer AS C INNER JOIN appointment as A ON C.customerId = A.customerId";
+                var mySqlString = "SELECT C.customerName,C.customerId, A.title, A.start FROM customer AS C INNER JOIN appointment as A ON C.customerId = A.customerId";
                 MySqlCommand mySqlCommand = new MySqlCommand(mySqlString,Data);
                 var reader = mySqlCommand.ExecuteReader();
                 while (reader.Read())
                 {
-                    var appointmentUI = new appointmentUI() { customerName = reader["customerName"].ToString(), AppoimentTime = reader["start"].ToString(), Appoinment = reader["title"].ToString() };
+                    var appointmentUI = new appointmentUI() { customerId = Convert.ToInt32(reader["customerId"]),customerName = reader["customerName"].ToString(), AppoimentTime = reader["start"].ToString(), Appoinment = reader["title"].ToString() };
 
                     returningList.Add(appointmentUI);
                 }

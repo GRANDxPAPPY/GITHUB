@@ -9,6 +9,7 @@ namespace C_2_969_Schedule_desktop_app
 {
     public class appointmentUI
     {
+        public int customerId { get; set; }
         public string customerName { get; set; }
         public string Appoinment { get; set; }
         public string AppoimentTime { get; set; }

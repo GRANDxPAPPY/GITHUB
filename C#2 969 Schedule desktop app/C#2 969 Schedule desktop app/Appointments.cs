@@ -28,29 +28,31 @@ namespace C_2_969_Schedule_desktop_app
 
         private void addAppointmentButton_Click(object sender, EventArgs e)
         {
-
-
-            
+            var returnedList = buildAppoinment();
+            var appointment = returnedList.Appointment;
+            DataService.AddAppointment(appointment,returnedList.Customer);
+            dataGridView1.DataSource = DataService.GetAppointmentUIs();
         }
 
         
-
-        public List<object> buildAppoinment()
+        
+        public (customer Customer, appointment Appointment) buildAppoinment()
         {
 
             var myDate = dateTimePicker1.Value;
 
             var timeString = TimeSpan.Parse(HourMinutesPicker.Text);
             var passingDate = myDate + timeString;
+
+            var selectedCustomer = (CustomerRecordsUI)comboBox1.SelectedItem;
             
-            var customer = new customer() { customerName = comboBox1.ValueMember}//add combo box selection here
-            ;
+            var customer = new customer();
+            customer.customerName = selectedCustomer.CustomerName;
+            customer.customerID = selectedCustomer.customerID;
             var appointment = new appointment() { title = AppointmentTypeTextbox.Text, start = passingDate};
 
-            var myList = new List<object>();
-            myList.Add(customer);
-            myList.Add(appointment);
-            return myList;
+            
+            return (customer, appointment);
 
             //takes inputs returns a list of objects
 
@@ -65,17 +67,19 @@ namespace C_2_969_Schedule_desktop_app
         private void Appointments_Load(object sender, EventArgs e)
         {
             //everytime page is loaded 
-            // make this only get the names form buildAppoinments
+            
 
             var returnedList = DataService.getCustomers();
-            //FIX ME!
+            
             var returnedAppointmentUI = DataService.GetAppointmentUIs();
-            var allUserNames = new List<string>();
-            foreach (var customer in returnedList)
-            {
-                allUserNames.Add(customer.CustomerName.ToString());
-            }
-            comboBox1.DataSource = allUserNames;
+            //var allUserNames = new List<string>();
+            //foreach (var customer in returnedList)
+            //{
+            //    allUserNames.Add(customer.CustomerName.ToString());
+            //}
+            comboBox1.DataSource = returnedList;
+            comboBox1.DisplayMember = "CustomerName";
+            comboBox1.ValueMember = "customerID";
             dataGridView1.DataSource = DataService.GetAppointmentUIs();
 
 

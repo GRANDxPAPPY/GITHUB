@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace C_2_969_Schedule_desktop_app
 {
-    internal class appointment
+    public class appointment
     {
         public int appointmentId { get; set; }
         public int customerId { get; set; }
