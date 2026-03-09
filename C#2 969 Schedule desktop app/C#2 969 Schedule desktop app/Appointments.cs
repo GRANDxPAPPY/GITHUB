@@ -28,36 +28,42 @@ namespace C_2_969_Schedule_desktop_app
 
         private void addAppointmentButton_Click(object sender, EventArgs e)
         {
-            var returnedList = buildAppoinment();
-            var appointment = returnedList.Appointment;
-            DataService.AddAppointment(appointment,returnedList.Customer);
-            dataGridView1.DataSource = DataService.GetAppointmentUIs();
+            
+            
+                var returnedList = buildAppoinment();
+                var appointment = returnedList.Appointment;
+                DataService.AddAppointment(appointment, returnedList.Customer);
+                dataGridView1.DataSource = DataService.GetAppointmentUIs();
+            
         }
 
         
         
         public (customer Customer, appointment Appointment) buildAppoinment()
         {
+                
+                var myDate = dateTimePicker1.Value.Date;
 
-            var myDate = dateTimePicker1.Value;
+            
+            var timeString = HourMinutesPicker.Value.TimeOfDay;
 
-            var timeString = TimeSpan.Parse(HourMinutesPicker.Text);
+
             var passingDate = myDate + timeString;
 
-            var selectedCustomer = (CustomerRecordsUI)comboBox1.SelectedItem;
-            
-            var customer = new customer();
-            customer.customerName = selectedCustomer.CustomerName;
-            customer.customerID = selectedCustomer.customerID;
-            var appointment = new appointment() { title = AppointmentTypeTextbox.Text, start = passingDate};
+                var selectedCustomer = (CustomerRecordsUI)comboBox1.SelectedItem;
 
-            
-            return (customer, appointment);
+                var customer = new customer();
+                customer.customerName = selectedCustomer.CustomerName;
+                customer.customerID = selectedCustomer.customerID;
+                var appointment = new appointment() { title = AppointmentTypeTextbox.Text, start = passingDate };
 
-            //takes inputs returns a list of objects
 
-            
-        }
+                return (customer, appointment);
+
+                //takes inputs returns a list of objects
+
+            }
+        
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -85,6 +91,7 @@ namespace C_2_969_Schedule_desktop_app
 
         }
 
+        
     }
 
    }

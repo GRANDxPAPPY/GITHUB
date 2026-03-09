@@ -36,10 +36,10 @@
             this.addAppointmentButton = new System.Windows.Forms.Button();
             this.UpdateApointmentButton = new System.Windows.Forms.Button();
             this.deleteAppoinmentUpdateButton = new System.Windows.Forms.Button();
-            this.HourMinutesPicker = new System.Windows.Forms.TextBox();
             this.timeAppointmentLabel = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.HourMinutesPicker = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -114,13 +114,6 @@
             this.deleteAppoinmentUpdateButton.UseVisualStyleBackColor = true;
             this.deleteAppoinmentUpdateButton.Click += new System.EventHandler(this.button3_Click);
             // 
-            // HourMinutesPicker
-            // 
-            this.HourMinutesPicker.Location = new System.Drawing.Point(325, 185);
-            this.HourMinutesPicker.Name = "HourMinutesPicker";
-            this.HourMinutesPicker.Size = new System.Drawing.Size(100, 20);
-            this.HourMinutesPicker.TabIndex = 10;
-            // 
             // timeAppointmentLabel
             // 
             this.timeAppointmentLabel.AutoSize = true;
@@ -132,9 +125,11 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(659, 59);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(685, 354);
             this.dataGridView1.TabIndex = 12;
             // 
@@ -147,16 +142,25 @@
             this.comboBox1.TabIndex = 13;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
+            // HourMinutesPicker
+            // 
+            this.HourMinutesPicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.HourMinutesPicker.Location = new System.Drawing.Point(343, 185);
+            this.HourMinutesPicker.Name = "HourMinutesPicker";
+            this.HourMinutesPicker.ShowUpDown = true;
+            this.HourMinutesPicker.Size = new System.Drawing.Size(77, 20);
+            this.HourMinutesPicker.TabIndex = 14;
+            // 
             // Appointments
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(1374, 527);
+            this.Controls.Add(this.HourMinutesPicker);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.timeAppointmentLabel);
-            this.Controls.Add(this.HourMinutesPicker);
             this.Controls.Add(this.deleteAppoinmentUpdateButton);
             this.Controls.Add(this.UpdateApointmentButton);
             this.Controls.Add(this.addAppointmentButton);
@@ -184,9 +188,9 @@
         private System.Windows.Forms.Button addAppointmentButton;
         private System.Windows.Forms.Button UpdateApointmentButton;
         private System.Windows.Forms.Button deleteAppoinmentUpdateButton;
-        private System.Windows.Forms.TextBox HourMinutesPicker;
         private System.Windows.Forms.Label timeAppointmentLabel;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.DateTimePicker HourMinutesPicker;
     }
 }

@@ -209,6 +209,7 @@ namespace C_2_969_Schedule_desktop_app
             }
             catch (Exception)
             {
+                MessageBox.Show("Failed Adding Appointment to Table");
                 return false;
                 
             }
