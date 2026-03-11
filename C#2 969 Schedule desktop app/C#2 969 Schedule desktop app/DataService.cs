@@ -3,6 +3,8 @@ using Mysqlx.Prepare;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.SqlTypes;
+using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -214,6 +216,69 @@ namespace C_2_969_Schedule_desktop_app
                 
             }
         }
+
+        
+        
+        public bool UpdateAppointment(appointment appointment, customer customer)
+        {
+            MySqlConnection Data = new MySqlConnection(pathToData);
+            try
+            {
+                using (Data)
+                {
+                    //title, start, customerId
+                    Data.Open();
+                    var mySqlString = @"UPDATE appointment SET start = @start, title = @title WHERE appointmentId = @appointmentId";
+
+
+                    MySqlCommand mySqlCommand = new MySqlCommand(mySqlString, Data);
+                    mySqlCommand.Parameters.AddWithValue("@start",appointment.start);
+                    mySqlCommand.Parameters.AddWithValue("@title",appointment.title);
+                    mySqlCommand.Parameters.AddWithValue("@appointmentId", appointment.appointmentId);
+                    mySqlCommand.ExecuteNonQuery();
+
+
+
+                    return true;
+
+                }
+            }
+
+            catch (Exception)
+            {
+                MessageBox.Show("Error Updating User Appointment");
+        
+        return false;
+            }
+
+
+        }
+
+        public bool DeleteAppointment(appointment appointment)
+        {
+
+            MySqlConnection Data = new MySqlConnection(pathToData);
+            try
+            {
+                using (Data)
+                {
+                    Data.Open();
+                    string MySqlString = @"DELETE FROM appointment WHERE appointmentId = @appointmentId";
+                    MySqlCommand mySqlCommand = new MySqlCommand(MySqlString, Data);
+                    mySqlCommand.Parameters.AddWithValue("@appointmentId", appointment.appointmentId);
+
+                    mySqlCommand.ExecuteNonQuery();
+                    return true;
+                }
+            }
+
+            catch (Exception)
+            {
+                MessageBox.Show("Error Deleteing User From Database");
+                return false;
+            }
+
+        }
         public List<appointmentUI> GetAppointmentUIs()
         {
             MySqlConnection Data = new MySqlConnection(pathToData);
@@ -225,18 +290,20 @@ namespace C_2_969_Schedule_desktop_app
         //public string Appoinment { get; set; }
         //public string AppoimentTime { get; set; }
 
-                var mySqlString = "SELECT C.customerName,C.customerId, A.title, A.start FROM customer AS C INNER JOIN appointment as A ON C.customerId = A.customerId";
+                var mySqlString = "SELECT C.customerName,C.customerId, A.title, A.start, A.appointmentId FROM customer AS C INNER JOIN appointment as A ON C.customerId = A.customerId";
                 MySqlCommand mySqlCommand = new MySqlCommand(mySqlString,Data);
                 var reader = mySqlCommand.ExecuteReader();
                 while (reader.Read())
                 {
-                    var appointmentUI = new appointmentUI() { customerId = Convert.ToInt32(reader["customerId"]),customerName = reader["customerName"].ToString(), AppoimentTime = reader["start"].ToString(), Appoinment = reader["title"].ToString() };
+                    var appointmentUI = new appointmentUI() { customerId = Convert.ToInt32(reader["customerId"]),customerName = reader["customerName"].ToString(), AppoimentTime = reader["start"].ToString(), Appoinment = reader["title"].ToString(), AppointmentId = Convert.ToInt32(reader["appointmentId"])};
 
                     returningList.Add(appointmentUI);
                 }
                 return returningList;
             } 
         }
+
+        
 
 
     }

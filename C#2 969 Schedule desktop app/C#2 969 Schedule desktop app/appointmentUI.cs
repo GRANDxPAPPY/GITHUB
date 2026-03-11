@@ -13,6 +13,7 @@ namespace C_2_969_Schedule_desktop_app
         public string customerName { get; set; }
         public string Appoinment { get; set; }
         public string AppoimentTime { get; set; }
-        
+        public int AppointmentId { get; set; }
+
     }
 }

@@ -84,6 +84,7 @@
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
             this.dateTimePicker1.TabIndex = 6;
+            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
             // addAppointmentButton
             // 
@@ -103,6 +104,7 @@
             this.UpdateApointmentButton.TabIndex = 8;
             this.UpdateApointmentButton.Text = "Update";
             this.UpdateApointmentButton.UseVisualStyleBackColor = true;
+            this.UpdateApointmentButton.Click += new System.EventHandler(this.UpdateApointmentButton_Click);
             // 
             // deleteAppoinmentUpdateButton
             // 
@@ -112,7 +114,7 @@
             this.deleteAppoinmentUpdateButton.TabIndex = 9;
             this.deleteAppoinmentUpdateButton.Text = "Delete";
             this.deleteAppoinmentUpdateButton.UseVisualStyleBackColor = true;
-            this.deleteAppoinmentUpdateButton.Click += new System.EventHandler(this.button3_Click);
+            this.deleteAppoinmentUpdateButton.Click += new System.EventHandler(this.deleteAppoinmentUpdateButton_Click);
             // 
             // timeAppointmentLabel
             // 
@@ -132,6 +134,7 @@
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(685, 354);
             this.dataGridView1.TabIndex = 12;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // comboBox1
             // 
@@ -145,11 +148,12 @@
             // HourMinutesPicker
             // 
             this.HourMinutesPicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.HourMinutesPicker.Location = new System.Drawing.Point(343, 185);
+            this.HourMinutesPicker.Location = new System.Drawing.Point(320, 185);
             this.HourMinutesPicker.Name = "HourMinutesPicker";
             this.HourMinutesPicker.ShowUpDown = true;
             this.HourMinutesPicker.Size = new System.Drawing.Size(77, 20);
             this.HourMinutesPicker.TabIndex = 14;
+            this.HourMinutesPicker.ValueChanged += new System.EventHandler(this.HourMinutesPicker_ValueChanged);
             // 
             // Appointments
             // 

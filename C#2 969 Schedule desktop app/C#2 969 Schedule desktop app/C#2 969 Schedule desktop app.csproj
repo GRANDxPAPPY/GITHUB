@@ -101,7 +101,7 @@
   <ItemGroup>
     <Compile Include="address.cs" />
     <Compile Include="appointment.cs" />
-    <Compile Include="addressUI.cs" />
+    <Compile Include="appointmentUI.cs" />
     <Compile Include="CustomerRecordsUI.cs" />
     <Compile Include="customer.cs" />
     <Compile Include="ErrorDetection.cs" />

@@ -9,6 +9,7 @@ namespace C_2_969_Schedule_desktop_app
 {
     public static class  ErrorDetection
     {
+        
         public static bool IsEmpty(string userString)
         {
             
