@@ -40,6 +40,7 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.HourMinutesPicker = new System.Windows.Forms.DateTimePicker();
+            this.AppointmentNotice = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -155,12 +156,23 @@
             this.HourMinutesPicker.TabIndex = 14;
             this.HourMinutesPicker.ValueChanged += new System.EventHandler(this.HourMinutesPicker_ValueChanged);
             // 
+            // AppointmentNotice
+            // 
+            this.AppointmentNotice.AutoSize = true;
+            this.AppointmentNotice.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AppointmentNotice.Location = new System.Drawing.Point(38, 448);
+            this.AppointmentNotice.Name = "AppointmentNotice";
+            this.AppointmentNotice.Size = new System.Drawing.Size(692, 31);
+            this.AppointmentNotice.TabIndex = 15;
+            this.AppointmentNotice.Text = "Notice: Appointments Are Scheduled For 1 Hour Periods";
+            // 
             // Appointments
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(1374, 527);
+            this.Controls.Add(this.AppointmentNotice);
             this.Controls.Add(this.HourMinutesPicker);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.dataGridView1);
@@ -196,5 +208,6 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.DateTimePicker HourMinutesPicker;
+        private System.Windows.Forms.Label AppointmentNotice;
     }
 }
