@@ -37,18 +37,22 @@ namespace C_2_969_Schedule_desktop_app
                     }
                 }
             }
+            if (x == true)
+            {
+                return;
+            }
             if (x == false)
             {
                 ErrorDetection.CorrectFormat(customerPhoneNumberTextbox.Text);
             }
 
             var customer = new customer();
-            customer.customerName = customerNameTextbox.Text;
+            customer.customerName = customerNameTextbox.Text.Trim();
 
             var address = new address();
-            address.phone = customerPhoneNumberTextbox.Text;
-            address.address1 = customerAddressTextbox.Text;
-            
+            address.phone = customerPhoneNumberTextbox.Text.Trim();
+            address.address1 = customerAddressTextbox.Text.Trim();
+
 
             DataService.AddCustomer(customer, address);
             dataGridView1.DataSource = DataService.getCustomers();
@@ -61,16 +65,16 @@ namespace C_2_969_Schedule_desktop_app
 
             var customer = new customer
             {
-                customerName = customerNameTextbox.Text,
+                customerName = customerNameTextbox.Text.Trim(),
                 customerID = Convert.ToInt32(rowIndex.Cells["customerID"].Value),
                 addressID = Convert.ToInt32(rowIndex.Cells["addressID"].Value)
             };
 
             var address = new address()
             {
-                address1 = customerAddressTextbox.Text,
-                
-                phone = customerPhoneNumberTextbox.Text
+                address1 = customerAddressTextbox.Text.Trim(),
+
+                phone = customerPhoneNumberTextbox.Text.Trim()
             };
 
             DataService.updateCustomer(customer, address);

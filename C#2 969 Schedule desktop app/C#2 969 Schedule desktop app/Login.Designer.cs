@@ -35,6 +35,7 @@
             this.userNameTextbox = new System.Windows.Forms.TextBox();
             this.passwordTextBox = new System.Windows.Forms.TextBox();
             this.submitButton = new System.Windows.Forms.Button();
+            this.createUserButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // helloLabel
@@ -43,9 +44,9 @@
             this.helloLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.helloLabel.Location = new System.Drawing.Point(116, 39);
             this.helloLabel.Name = "helloLabel";
-            this.helloLabel.Size = new System.Drawing.Size(105, 39);
+            this.helloLabel.Size = new System.Drawing.Size(168, 39);
             this.helloLabel.TabIndex = 0;
-            this.helloLabel.Text = "Hello!";
+            this.helloLabel.Text = "Welcome!";
             this.helloLabel.Click += new System.EventHandler(this.helloLabel_Click);
             // 
             // loginLabel
@@ -92,13 +93,23 @@
             // 
             // submitButton
             // 
-            this.submitButton.Location = new System.Drawing.Point(554, 371);
+            this.submitButton.Location = new System.Drawing.Point(458, 368);
             this.submitButton.Name = "submitButton";
             this.submitButton.Size = new System.Drawing.Size(75, 23);
             this.submitButton.TabIndex = 6;
-            this.submitButton.Text = "submit";
+            this.submitButton.Text = "Login";
             this.submitButton.UseVisualStyleBackColor = true;
             this.submitButton.Click += new System.EventHandler(this.submitButton_Click);
+            // 
+            // createUserButton
+            // 
+            this.createUserButton.Location = new System.Drawing.Point(614, 368);
+            this.createUserButton.Name = "createUserButton";
+            this.createUserButton.Size = new System.Drawing.Size(75, 23);
+            this.createUserButton.TabIndex = 7;
+            this.createUserButton.Text = "Create User";
+            this.createUserButton.UseVisualStyleBackColor = true;
+            this.createUserButton.Click += new System.EventHandler(this.createUserButton_Click);
             // 
             // Login
             // 
@@ -106,6 +117,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(1206, 596);
+            this.Controls.Add(this.createUserButton);
             this.Controls.Add(this.submitButton);
             this.Controls.Add(this.passwordTextBox);
             this.Controls.Add(this.userNameTextbox);
@@ -130,6 +142,7 @@
         private System.Windows.Forms.TextBox userNameTextbox;
         private System.Windows.Forms.TextBox passwordTextBox;
         private System.Windows.Forms.Button submitButton;
+        private System.Windows.Forms.Button createUserButton;
     }
 }
 

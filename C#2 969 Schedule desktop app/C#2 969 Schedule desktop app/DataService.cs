@@ -279,6 +279,47 @@ namespace C_2_969_Schedule_desktop_app
             }
 
         }
+
+        public bool Adduser(user user)
+        {
+            MySqlConnection Data = new MySqlConnection(pathToData);
+            using (Data)
+            {
+                Data.Open();
+                var mySqlString = @"INSERT INTO user (userName,password)
+                              Values(@userName,@password)";
+               
+                MySqlCommand mySqlCommand = new MySqlCommand(mySqlString, Data);
+                mySqlCommand.Parameters.AddWithValue("@userName",user.userName);
+                mySqlCommand.Parameters.AddWithValue("@password", user.password);
+                mySqlCommand.ExecuteNonQuery();
+                return true;
+            }
+        }
+
+
+        
+
+        public List<user> GetUsers()
+        {
+            MySqlConnection Data = new MySqlConnection(pathToData);
+            using (Data)
+            {
+                Data.Open();
+                var userList = new List<user>();
+
+                var mySqlString = @"SELECT userName,password
+                                FROM user";
+                MySqlCommand mySqlCommand = new MySqlCommand(mySqlString, Data);
+                var reader = mySqlCommand.ExecuteReader();
+                while(reader.Read())
+                {
+                    var user = new user() { userName = reader["userName"].ToString(), password = reader["password"].ToString() };
+                    userList.Add(user);
+                }
+                return userList;
+            }
+        }
         public List<appointmentUI> GetAppointmentUIs()
         {
             MySqlConnection Data = new MySqlConnection(pathToData);

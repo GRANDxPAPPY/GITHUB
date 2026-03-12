@@ -42,3 +42,5 @@ C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule deskt
 C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\obj\Debug\C#2 969 .02074260.Up2Date
+C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\bin\Debug\BCrypt.Net-Next.dll
+C:\Users\brysi\GITHUB\GITHUB\C#2 969 Schedule desktop app\C#2 969 Schedule desktop app\bin\Debug\BCrypt.Net-Next.xml

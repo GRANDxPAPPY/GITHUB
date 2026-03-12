@@ -169,7 +169,7 @@
             // 
             // CalenderFromButton
             // 
-            this.CalenderFromButton.Location = new System.Drawing.Point(1380, 59);
+            this.CalenderFromButton.Location = new System.Drawing.Point(106, 348);
             this.CalenderFromButton.Name = "CalenderFromButton";
             this.CalenderFromButton.Size = new System.Drawing.Size(75, 23);
             this.CalenderFromButton.TabIndex = 16;

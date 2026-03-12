@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -56,15 +57,41 @@ namespace C_2_969_Schedule_desktop_app
 
                 }).ToList();
 
+
+
+            //3rd will display user and number of logins
+            var logPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Login_History.txt");
+            var logLines = File.ReadAllLines(logPath);
+
+            var countLoginsPerMonth = logLines
+                .Where(line => !string.IsNullOrWhiteSpace(line))
+                .Select(line =>
+                {
+                    var parts = line.Split(new[] { ' ' }, 2);
+                    return new
+                    {
+                        UserName = parts[0],
+                        LoginDate = DateTime.Parse(parts[1])
+                    };
+                })
+                .Where(log => log.LoginDate.Month == monthCalendar1.SelectionStart.Month
+                           && log.LoginDate.Year == monthCalendar1.SelectionStart.Year)
+                .GroupBy(log => log.UserName)
+                .Select(g => new LoginUI
+                {
+                    UserName = g.Key,
+                    LoginCount = g.Count()
+                })
+                .ToList();
+
+
+            dataGridView3.DataSource = countLoginsPerMonth;
             dataGridReports.DataSource = countPerMonthList;
             dataGridView1.DataSource = dataList;
             dataGridView2.DataSource = countPTODays;
         }
-       
-        //3rd will display user and number of logins
 
-
-
+        
 
         private void Calander_Load(object sender, EventArgs e)
         {
@@ -115,5 +142,10 @@ namespace C_2_969_Schedule_desktop_app
     {
         public string CustomerName { get; set; }
         public int PTO_Used { get; set; }
+    }
+    internal class LoginUI
+    {
+        public string UserName { get; set; }
+        public int LoginCount { get; set; }
     }
 }
