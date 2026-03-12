@@ -102,6 +102,7 @@
     <Compile Include="address.cs" />
     <Compile Include="appointment.cs" />
     <Compile Include="appointmentUI.cs" />
+    <Compile Include="user.cs" />
     <Compile Include="CustomerRecordsUI.cs" />
     <Compile Include="customer.cs" />
     <Compile Include="ErrorDetection.cs" />

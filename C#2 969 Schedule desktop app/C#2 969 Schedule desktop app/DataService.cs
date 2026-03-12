@@ -200,7 +200,7 @@ namespace C_2_969_Schedule_desktop_app
                     var mySqlString = "INSERT INTO appointment(title,start,customerId) VALUES(@title,@start,@customerId)";
                     MySqlCommand mySqlCommand = new MySqlCommand(mySqlString, Data);
                     mySqlCommand.Parameters.AddWithValue("@title", appointment.title);
-                    mySqlCommand.Parameters.AddWithValue("@start", appointment.start);
+                    mySqlCommand.Parameters.AddWithValue("@start", TimeZoneInfo.ConvertTimeToUtc(appointment.start));
                     mySqlCommand.Parameters.AddWithValue("@customerId", customer.customerID);
                     mySqlCommand.ExecuteNonQuery();
                     
@@ -232,7 +232,7 @@ namespace C_2_969_Schedule_desktop_app
 
 
                     MySqlCommand mySqlCommand = new MySqlCommand(mySqlString, Data);
-                    mySqlCommand.Parameters.AddWithValue("@start",appointment.start);
+                    mySqlCommand.Parameters.AddWithValue("@start",TimeZoneInfo.ConvertTimeToUtc(appointment.start));
                     mySqlCommand.Parameters.AddWithValue("@title",appointment.title);
                     mySqlCommand.Parameters.AddWithValue("@appointmentId", appointment.appointmentId);
                     mySqlCommand.ExecuteNonQuery();
@@ -295,7 +295,7 @@ namespace C_2_969_Schedule_desktop_app
                 var reader = mySqlCommand.ExecuteReader();
                 while (reader.Read())
                 {
-                    var appointmentUI = new appointmentUI() { customerId = Convert.ToInt32(reader["customerId"]),customerName = reader["customerName"].ToString(), AppoimentTime = reader["start"].ToString(), Appoinment = reader["title"].ToString(), AppointmentId = Convert.ToInt32(reader["appointmentId"])};
+                    var appointmentUI = new appointmentUI() { customerId = Convert.ToInt32(reader["customerId"]),customerName = reader["customerName"].ToString(), AppoimentTime = TimeZoneInfo.ConvertTimeFromUtc((DateTime)reader["start"], TimeZoneInfo.Local).ToString(), Appoinment = reader["title"].ToString(), AppointmentId = Convert.ToInt32(reader["appointmentId"])};
 
                     returningList.Add(appointmentUI);
                 }

@@ -12,9 +12,108 @@ namespace C_2_969_Schedule_desktop_app
 {
     public partial class Calander : Form
     {
+
+        DataService DataService = new DataService();
+        
+
+
+
         public Calander()
         {
             InitializeComponent();
         }
+
+        private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            //make it only show when you click on day
+            var tempHold = DataService.GetAppointmentUIs();
+            var dataList = new List<UI>();
+            foreach (var appointment in tempHold)
+            {
+                if (DateTime.Parse(appointment.AppoimentTime).Date == monthCalendar1.SelectionStart.Date)
+                { 
+                var ui = new UI() { appointmentName = appointment.Appoinment, customerName = appointment.customerName };
+                dataList.Add(ui);
+           
+                }
+            }
+            //first Lamba
+            var countPerMonthList = tempHold.Where(n => DateTime.Parse(n.AppoimentTime).Month == monthCalendar1.SelectionStart.Month && DateTime.Parse(n.AppoimentTime).Year == monthCalendar1.SelectionStart.Year)
+                .GroupBy(n => n.Appoinment)
+                .Select(n => new countUI
+                {
+                    Type = n.Key,
+                    count = n.Count()
+                }).ToList();
+            
+            //secon
+            var countPTODays = tempHold.Where(n => DateTime.Parse(n.AppoimentTime).Month == monthCalendar1.SelectionStart.Month && DateTime.Parse(n.AppoimentTime).Year == monthCalendar1.SelectionStart.Year)
+                .GroupBy(n => n.customerName)
+                .Select(n => new scheduleUI
+                {
+                    CustomerName = n.Key,
+                    PTO_Used = n.Count()
+
+                }).ToList();
+
+            dataGridReports.DataSource = countPerMonthList;
+            dataGridView1.DataSource = dataList;
+            dataGridView2.DataSource = countPTODays;
+        }
+       
+        //3rd will display user and number of logins
+
+
+
+
+        private void Calander_Load(object sender, EventArgs e)
+        {
+            List<DateTime> appointmentArray = new List<DateTime>();
+            
+            //Wouldnt have to do this if i just followed the system and didnt try to be a smart ass with it
+            foreach (var appointment in DataService.GetAppointmentUIs())
+            {
+
+                appointmentArray.Add(DateTime.Parse(appointment.AppoimentTime));
+                
+            }
+            
+            monthCalendar1.BoldedDates = appointmentArray.ToArray();
+
+            
+        }
+
+
+       
+
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dataGridReports_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+    }
+
+    internal class UI
+    {
+        public string customerName { get; set; }
+        public string appointmentName { get; set; }
+        
+    }
+
+    internal class countUI
+    {
+        public string Type { get; set; }
+        public int count { get; set; }
+    }
+
+    internal class scheduleUI
+    {
+        public string CustomerName { get; set; }
+        public int PTO_Used { get; set; }
     }
 }

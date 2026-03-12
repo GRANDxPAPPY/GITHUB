@@ -41,6 +41,7 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.HourMinutesPicker = new System.Windows.Forms.DateTimePicker();
             this.AppointmentNotice = new System.Windows.Forms.Label();
+            this.CalenderFromButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -160,18 +161,29 @@
             // 
             this.AppointmentNotice.AutoSize = true;
             this.AppointmentNotice.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AppointmentNotice.Location = new System.Drawing.Point(38, 448);
+            this.AppointmentNotice.Location = new System.Drawing.Point(13, 571);
             this.AppointmentNotice.Name = "AppointmentNotice";
             this.AppointmentNotice.Size = new System.Drawing.Size(692, 31);
             this.AppointmentNotice.TabIndex = 15;
             this.AppointmentNotice.Text = "Notice: Appointments Are Scheduled For 1 Hour Periods";
+            // 
+            // CalenderFromButton
+            // 
+            this.CalenderFromButton.Location = new System.Drawing.Point(1380, 59);
+            this.CalenderFromButton.Name = "CalenderFromButton";
+            this.CalenderFromButton.Size = new System.Drawing.Size(75, 23);
+            this.CalenderFromButton.TabIndex = 16;
+            this.CalenderFromButton.Text = "Calender";
+            this.CalenderFromButton.UseVisualStyleBackColor = true;
+            this.CalenderFromButton.Click += new System.EventHandler(this.CalenderFromButton_Click);
             // 
             // Appointments
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1374, 527);
+            this.ClientSize = new System.Drawing.Size(1490, 647);
+            this.Controls.Add(this.CalenderFromButton);
             this.Controls.Add(this.AppointmentNotice);
             this.Controls.Add(this.HourMinutesPicker);
             this.Controls.Add(this.comboBox1);
@@ -209,5 +221,6 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.DateTimePicker HourMinutesPicker;
         private System.Windows.Forms.Label AppointmentNotice;
+        private System.Windows.Forms.Button CalenderFromButton;
     }
 }

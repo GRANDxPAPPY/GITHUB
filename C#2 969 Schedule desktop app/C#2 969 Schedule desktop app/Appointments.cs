@@ -170,7 +170,11 @@ namespace C_2_969_Schedule_desktop_app
             }
         }
 
-        
+        private void CalenderFromButton_Click(object sender, EventArgs e)
+        {
+            var calanderFlop = new Calander();
+            calanderFlop.ShowDialog();
+        }
     }
 }
 

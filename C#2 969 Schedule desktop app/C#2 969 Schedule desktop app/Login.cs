@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -26,6 +28,27 @@ namespace C_2_969_Schedule_desktop_app
         {
             var x = new  CustomerRecords();
             x.ShowDialog();
+        }
+
+        public void Lang()
+        {
+            var x = System.Globalization.CultureInfo.CurrentCulture; ;
+            var y =System.Globalization.CultureInfo.CurrentUICulture;
+        }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+            var location = CultureInfo.CurrentCulture;
+            //en-US
+            //MessageBox.Show(location.ToString());
+            if (CultureInfo.CurrentUICulture.Name.StartsWith("fr"))
+            {
+                return;
+            }
+            else
+            {
+                return;
+            }
         }
     }
 }
