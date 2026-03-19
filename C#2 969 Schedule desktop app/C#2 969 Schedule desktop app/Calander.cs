@@ -15,7 +15,7 @@ namespace C_2_969_Schedule_desktop_app
     {
 
         DataService DataService = new DataService();
-        
+
 
 
 
@@ -32,10 +32,10 @@ namespace C_2_969_Schedule_desktop_app
             foreach (var appointment in tempHold)
             {
                 if (DateTime.Parse(appointment.AppoimentTime).Date == monthCalendar1.SelectionStart.Date)
-                { 
-                var ui = new UI() { appointmentName = appointment.Appoinment, customerName = appointment.customerName };
-                dataList.Add(ui);
-           
+                {
+                    var ui = new UI() { appointmentName = appointment.Appoinment, customerName = appointment.customerName };
+                    dataList.Add(ui);
+
                 }
             }
             //first Lamba
@@ -46,7 +46,7 @@ namespace C_2_969_Schedule_desktop_app
                     Type = n.Key,
                     count = n.Count()
                 }).ToList();
-            
+
             //secon
             var countPTODays = tempHold.Where(n => DateTime.Parse(n.AppoimentTime).Month == monthCalendar1.SelectionStart.Month && DateTime.Parse(n.AppoimentTime).Year == monthCalendar1.SelectionStart.Year)
                 .GroupBy(n => n.customerName)
@@ -61,57 +61,65 @@ namespace C_2_969_Schedule_desktop_app
 
             //3rd will display user and number of logins
             var logPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Login_History.txt");
-            var logLines = File.ReadAllLines(logPath);
 
-            var countLoginsPerMonth = logLines
-                .Where(line => !string.IsNullOrWhiteSpace(line))
-                .Select(line =>
-                {
-                    var parts = line.Split(new[] { ' ' }, 2);
-                    return new
+            if (File.Exists(logPath))
+            {
+                var logLines = File.ReadAllLines(logPath);
+
+                var countLoginsPerMonth = logLines
+                    .Where(line => !string.IsNullOrWhiteSpace(line))
+                    .Select(line =>
                     {
-                        UserName = parts[0],
-                        LoginDate = DateTime.Parse(parts[1])
-                    };
-                })
-                .Where(log => log.LoginDate.Month == monthCalendar1.SelectionStart.Month
-                           && log.LoginDate.Year == monthCalendar1.SelectionStart.Year)
-                .GroupBy(log => log.UserName)
-                .Select(g => new LoginUI
-                {
-                    UserName = g.Key,
-                    LoginCount = g.Count()
-                })
-                .ToList();
+                        var parts = line.Split(new[] { ' ' }, 2);
+                        return new
+                        {
+                            UserName = parts[0],
+                            LoginDate = DateTime.Parse(parts[1])
+                        };
+                    })
+                    .Where(log => log.LoginDate.Month == monthCalendar1.SelectionStart.Month
+                               && log.LoginDate.Year == monthCalendar1.SelectionStart.Year)
+                    .GroupBy(log => log.UserName)
+                    .Select(g => new LoginUI
+                    {
+                        UserName = g.Key,
+                        LoginCount = g.Count()
+                    })
+                    .ToList();
 
+                dataGridView3.DataSource = countLoginsPerMonth;
+            }
+            else
+            {
+                dataGridView3.DataSource = new List<LoginUI>();
+            }
 
-            dataGridView3.DataSource = countLoginsPerMonth;
             dataGridReports.DataSource = countPerMonthList;
             dataGridView1.DataSource = dataList;
             dataGridView2.DataSource = countPTODays;
         }
 
-        
+
 
         private void Calander_Load(object sender, EventArgs e)
         {
             List<DateTime> appointmentArray = new List<DateTime>();
-            
-            //Wouldnt have to do this if i just followed the system and didnt try to be a smart ass with it
+
+
             foreach (var appointment in DataService.GetAppointmentUIs())
             {
 
                 appointmentArray.Add(DateTime.Parse(appointment.AppoimentTime));
-                
+
             }
-            
+
             monthCalendar1.BoldedDates = appointmentArray.ToArray();
 
-            
+
         }
 
 
-       
+
 
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -129,7 +137,7 @@ namespace C_2_969_Schedule_desktop_app
     {
         public string customerName { get; set; }
         public string appointmentName { get; set; }
-        
+
     }
 
     internal class countUI

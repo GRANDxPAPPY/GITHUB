@@ -16,7 +16,7 @@ namespace C_2_969_Schedule_desktop_app
 {
     public class DataService
     {
-        readonly string pathToData = ConfigurationManager.ConnectionStrings["scheduledb"].ConnectionString;
+        readonly string pathToData = ConfigurationManager.ConnectionStrings["client_schedule"].ConnectionString;
 
 
 
@@ -29,13 +29,14 @@ namespace C_2_969_Schedule_desktop_app
                 {
                     Data.Open();
                     string addressQuery = @"INSERT INTO address 
-                        (address, address2, postalCode, phone, createDate, createdBy, lastUpdate, lastUpdateBy) 
-                        VALUES (@address, @address2, @postalCode, @phone, @createDate, @createdBy, @lastUpdate, @lastUpdateBy)";
+                (address, address2, cityId, postalCode, phone, createDate, createdBy, lastUpdate, lastUpdateBy) 
+                VALUES (@address, @address2, @cityId, @postalCode, @phone, @createDate, @createdBy, @lastUpdate, @lastUpdateBy)";
 
                     MySqlCommand addressCommandVar = new MySqlCommand(addressQuery, Data);
 
                     addressCommandVar.Parameters.AddWithValue("@address", address.address1);
                     addressCommandVar.Parameters.AddWithValue("@address2", address.address2 ?? "");
+                    addressCommandVar.Parameters.AddWithValue("@cityId", 1);
                     addressCommandVar.Parameters.AddWithValue("@postalCode", address.postalCode ?? "");
                     addressCommandVar.Parameters.AddWithValue("@phone", address.phone);
                     addressCommandVar.Parameters.AddWithValue("@createDate", new DateTime(2024, 1, 1));
@@ -48,8 +49,8 @@ namespace C_2_969_Schedule_desktop_app
                     var newaddId = addressCommandVar.LastInsertedId;
 
                     string query = @"INSERT INTO customer 
-                        (customerName, addressId, active, createDate, createdBy, lastUpdate, lastUpdateBy) 
-                        VALUES (@customerName, @addressId, @active, @createDate, @createdBy, @lastUpdate, @lastUpdateBy)";
+                (customerName, addressId, active, createDate, createdBy, lastUpdate, lastUpdateBy) 
+                VALUES (@customerName, @addressId, @active, @createDate, @createdBy, @lastUpdate, @lastUpdateBy)";
 
                     MySqlCommand commandVar = new MySqlCommand(query, Data);
 
@@ -74,6 +75,7 @@ namespace C_2_969_Schedule_desktop_app
 
             }
         }
+        
 
         public bool DeleteCustomer(customer customer)
         {
@@ -84,9 +86,18 @@ namespace C_2_969_Schedule_desktop_app
                 using (Data)
                 {
                     Data.Open();
-                    var deleteque = "DELETE FROM customer WHERE customerId = @customerId";
 
+
+                    var deleteque = "DELETE FROM appointment WHERE customerId = @customerId";
                     MySqlCommand myDeleteCommand = new MySqlCommand(deleteque, Data);
+
+                    myDeleteCommand.Parameters.AddWithValue("@customerId",customer.customerID);
+                    myDeleteCommand.ExecuteNonQuery();
+
+
+                    deleteque = "DELETE FROM customer WHERE customerId = @customerId";
+
+                    myDeleteCommand = new MySqlCommand(deleteque, Data);
 
                     myDeleteCommand.Parameters.AddWithValue("@customerId", customer.customerID);
 
@@ -143,16 +154,18 @@ namespace C_2_969_Schedule_desktop_app
                     Data.Open();
 
                     var mySqlString = @"UPDATE address SET 
-                        phone = @phone, 
-                        address = @address, 
-                        address2 = @address2,
-                        postalCode = @postalCode,
-                        lastUpdate = @lastUpdate,
-                        lastUpdateBy = @lastUpdateBy
-                        WHERE addressId = @addressId";
+                phone = @phone, 
+                address = @address, 
+                address2 = @address2,
+                cityId = @cityId,
+                postalCode = @postalCode,
+                lastUpdate = @lastUpdate,
+                lastUpdateBy = @lastUpdateBy
+                WHERE addressId = @addressId";
                     MySqlCommand mySqlController = new MySqlCommand(mySqlString, Data);
                     mySqlController.Parameters.AddWithValue("@address", address.address1);
                     mySqlController.Parameters.AddWithValue("@address2", address.address2 ?? "");
+                    mySqlController.Parameters.AddWithValue("@cityId", 1);
                     mySqlController.Parameters.AddWithValue("@postalCode", address.postalCode ?? "");
                     mySqlController.Parameters.AddWithValue("@phone", address.phone);
                     mySqlController.Parameters.AddWithValue("@addressId", customer.addressID);
@@ -163,10 +176,10 @@ namespace C_2_969_Schedule_desktop_app
 
 
                     mySqlString = @"UPDATE customer SET 
-                        customerName = @customerName,
-                        lastUpdate = @lastUpdate,
-                        lastUpdateBy = @lastUpdateBy
-                        WHERE customerId = @customerId";
+                customerName = @customerName,
+                lastUpdate = @lastUpdate,
+                lastUpdateBy = @lastUpdateBy
+                WHERE customerId = @customerId";
                     mySqlController = new MySqlCommand(mySqlString, Data);
                     mySqlController.Parameters.AddWithValue("@customerName", customer.customerName);
                     mySqlController.Parameters.AddWithValue("@customerId", customer.customerID);
@@ -197,15 +210,28 @@ namespace C_2_969_Schedule_desktop_app
                 using (Data)
                 {
                     Data.Open();
-                    var mySqlString = "INSERT INTO appointment(title,start,customerId) VALUES(@title,@start,@customerId)";
-                    MySqlCommand mySqlCommand = new MySqlCommand(mySqlString, Data);
-                    mySqlCommand.Parameters.AddWithValue("@title", appointment.title);
-                    mySqlCommand.Parameters.AddWithValue("@start", TimeZoneInfo.ConvertTimeToUtc(appointment.start));
-                    mySqlCommand.Parameters.AddWithValue("@customerId", customer.customerID);
-                    mySqlCommand.ExecuteNonQuery();
-                    
+                    var mySqlString = @"INSERT INTO appointment
+                (customerId, userId, title, description, location, contact, type, url, start, end, createDate, createdBy, lastUpdate, lastUpdateBy) 
+                VALUES
+                (@customerId, @userId, @title, @description, @location, @contact, @type, @url, @start, @end, @createDate, @createdBy, @lastUpdate, @lastUpdateBy)";
 
-                    
+                    MySqlCommand mySqlCommand = new MySqlCommand(mySqlString, Data);
+                    mySqlCommand.Parameters.AddWithValue("@customerId", customer.customerID);
+                    mySqlCommand.Parameters.AddWithValue("@userId", 1);
+                    mySqlCommand.Parameters.AddWithValue("@title", appointment.title);
+                    mySqlCommand.Parameters.AddWithValue("@description", appointment.description ?? "");
+                    mySqlCommand.Parameters.AddWithValue("@location", appointment.location ?? "");
+                    mySqlCommand.Parameters.AddWithValue("@contact", appointment.contact ?? "");
+                    mySqlCommand.Parameters.AddWithValue("@type", appointment.type ?? "");
+                    mySqlCommand.Parameters.AddWithValue("@url", appointment.url ?? "");
+                    mySqlCommand.Parameters.AddWithValue("@start", TimeZoneInfo.ConvertTimeToUtc(appointment.start));
+                    mySqlCommand.Parameters.AddWithValue("@end", TimeZoneInfo.ConvertTimeToUtc(appointment.end));
+                    mySqlCommand.Parameters.AddWithValue("@createDate", DateTime.Now);
+                    mySqlCommand.Parameters.AddWithValue("@createdBy", "system");
+                    mySqlCommand.Parameters.AddWithValue("@lastUpdate", DateTime.Now);
+                    mySqlCommand.Parameters.AddWithValue("@lastUpdateBy", "system");
+                    mySqlCommand.ExecuteNonQuery();
+
                     return true;
                 }
             }
@@ -213,12 +239,11 @@ namespace C_2_969_Schedule_desktop_app
             {
                 MessageBox.Show("Failed Adding Appointment to Table");
                 return false;
-                
             }
         }
 
-        
-        
+
+
         public bool UpdateAppointment(appointment appointment, customer customer)
         {
             MySqlConnection Data = new MySqlConnection(pathToData);
@@ -226,32 +251,42 @@ namespace C_2_969_Schedule_desktop_app
             {
                 using (Data)
                 {
-                    //title, start, customerId
                     Data.Open();
-                    var mySqlString = @"UPDATE appointment SET start = @start, title = @title WHERE appointmentId = @appointmentId";
-
+                    var mySqlString = @"UPDATE appointment SET 
+                start = @start, 
+                end = @end,
+                title = @title,
+                description = @description,
+                location = @location,
+                contact = @contact,
+                type = @type,
+                url = @url,
+                lastUpdate = @lastUpdate,
+                lastUpdateBy = @lastUpdateBy
+                WHERE appointmentId = @appointmentId";
 
                     MySqlCommand mySqlCommand = new MySqlCommand(mySqlString, Data);
-                    mySqlCommand.Parameters.AddWithValue("@start",TimeZoneInfo.ConvertTimeToUtc(appointment.start));
-                    mySqlCommand.Parameters.AddWithValue("@title",appointment.title);
+                    mySqlCommand.Parameters.AddWithValue("@start", TimeZoneInfo.ConvertTimeToUtc(appointment.start));
+                    mySqlCommand.Parameters.AddWithValue("@end", TimeZoneInfo.ConvertTimeToUtc(appointment.end));
+                    mySqlCommand.Parameters.AddWithValue("@title", appointment.title);
+                    mySqlCommand.Parameters.AddWithValue("@description", appointment.description ?? "");
+                    mySqlCommand.Parameters.AddWithValue("@location", appointment.location ?? "");
+                    mySqlCommand.Parameters.AddWithValue("@contact", appointment.contact ?? "");
+                    mySqlCommand.Parameters.AddWithValue("@type", appointment.type ?? "");
+                    mySqlCommand.Parameters.AddWithValue("@url", appointment.url ?? "");
+                    mySqlCommand.Parameters.AddWithValue("@lastUpdate", DateTime.Now);
+                    mySqlCommand.Parameters.AddWithValue("@lastUpdateBy", "system");
                     mySqlCommand.Parameters.AddWithValue("@appointmentId", appointment.appointmentId);
                     mySqlCommand.ExecuteNonQuery();
 
-
-
                     return true;
-
                 }
             }
-
             catch (Exception)
             {
                 MessageBox.Show("Error Updating User Appointment");
-        
-        return false;
+                return false;
             }
-
-
         }
 
         public bool DeleteAppointment(appointment appointment)
@@ -286,19 +321,25 @@ namespace C_2_969_Schedule_desktop_app
             using (Data)
             {
                 Data.Open();
-                var mySqlString = @"INSERT INTO user (userName,password)
-                              Values(@userName,@password)";
-               
+                var mySqlString = @"INSERT INTO user (userName, password, active, createDate, createdBy, lastUpdate, lastUpdateBy)
+                      Values(@userName, @password, @active, @createDate, @createdBy, @lastUpdate, @lastUpdateBy)";
+
                 MySqlCommand mySqlCommand = new MySqlCommand(mySqlString, Data);
-                mySqlCommand.Parameters.AddWithValue("@userName",user.userName);
+                mySqlCommand.Parameters.AddWithValue("@userName", user.userName);
                 mySqlCommand.Parameters.AddWithValue("@password", user.password);
+                mySqlCommand.Parameters.AddWithValue("@active", 1);
+                mySqlCommand.Parameters.AddWithValue("@createDate", DateTime.Now);
+                mySqlCommand.Parameters.AddWithValue("@createdBy", "system");
+                mySqlCommand.Parameters.AddWithValue("@lastUpdate", DateTime.Now);
+                mySqlCommand.Parameters.AddWithValue("@lastUpdateBy", "system");
                 mySqlCommand.ExecuteNonQuery();
                 return true;
             }
         }
-
-
         
+
+
+
 
         public List<user> GetUsers()
         {
