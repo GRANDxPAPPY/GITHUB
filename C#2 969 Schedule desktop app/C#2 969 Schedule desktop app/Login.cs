@@ -69,7 +69,7 @@ namespace C_2_969_Schedule_desktop_app
             
             if (CultureInfo.CurrentUICulture.Name.StartsWith("fr"))
             {
-                helloLabel.Text = "bienvenu";
+                helloLabel.Text = "bienvenue de france";
                 loginLabel.Text = "se connecter";
                 usernameLabel.Text = "nom d'utilisateur";
                 passwordLabel.Text = "mot de passe";

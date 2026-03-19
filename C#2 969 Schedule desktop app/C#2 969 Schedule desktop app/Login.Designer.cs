@@ -44,9 +44,9 @@
             this.helloLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.helloLabel.Location = new System.Drawing.Point(116, 39);
             this.helloLabel.Name = "helloLabel";
-            this.helloLabel.Size = new System.Drawing.Size(168, 39);
+            this.helloLabel.Size = new System.Drawing.Size(390, 39);
             this.helloLabel.TabIndex = 0;
-            this.helloLabel.Text = "Welcome!";
+            this.helloLabel.Text = "Welcome From America!";
             this.helloLabel.Click += new System.EventHandler(this.helloLabel_Click);
             // 
             // loginLabel
