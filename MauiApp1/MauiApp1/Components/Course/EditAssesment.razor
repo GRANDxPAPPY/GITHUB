@@ -1,0 +1,98 @@
+﻿@inject MauiApp1.Services.DataService DataService
+@using MauiApp1.Storage
+@using MauiApp1.Components.Shared
+
+<ModalPopup IsVisible="@IsVisible" Title="Edit Courses:" OnClose="OnClose" ShowDefaultButtons="false">
+
+    <div>
+        
+        <select @bind="chosenAssesmentId">
+            <option value="0">--Chose Assesments--</option>
+            @foreach (var assesment in assementList)
+            {
+                <option value="@assesment.assesmentId">@assesment.Name</option>
+            }
+        </select>
+        <label>Enter New Assesment Name:</label>
+        <input type="text" @bind="assesmentName"/>
+        <label>Enter New Assesment Info:</label>
+        <input type="text" @bind="assesmentInfo"/>
+        <br />
+        <label for="assesmenttype">Choose Assesment Type:</label>
+        <br />
+        <select @bind="assesmentType" id="assesmenttype">
+           <option>OA</option>
+           <option>PA</option>
+        </select>
+
+    </div>
+    <div class="buttonHolder">
+        <button class="termOptions" @onclick="UpdateAssesment">Add</button>
+        <button @onclick="() => DeleteAssesment()" class="termOptions">Delete</button>
+        <button class="termOptions" @onclick="OnClose">Cancel</button>
+    </div>
+</ModalPopup>
+
+@code {
+    [Parameter] public bool IsVisible { get; set; }
+    [Parameter] public int CourseId { get; set; }
+    [Parameter] public EventCallback OnClose { get; set; }
+    [Parameter] public EventCallback EditedAssesment { get; set; }
+
+    List<Assesment> holdingList;
+    List<Assesment> assementList;
+    string assesmentName;
+    string assesmentInfo;
+    string assesmentType;
+    int notificationActive=0;
+
+    int chosenAssesmentId;
+    protected override async Task OnInitializedAsync()
+    {
+        holdingList = await DataService.GetAssesments();
+        assementList =  holdingList.Where(a => a.courseId == CourseId).ToList();
+    }
+    protected override async Task OnParametersSetAsync()
+    {
+        if (!IsVisible) return;
+
+        holdingList = await DataService.GetAssesments();
+        assementList = holdingList.Where(a => a.courseId == CourseId).ToList();
+
+        chosenAssesmentId = 0; 
+    }
+    private async Task  UpdateAssesment()
+    {
+        var answer = await Application.Current.MainPage.DisplayAlertAsync("Before Submission", "Do you wish to get a notifications for start and end dates for assesment?", "yes", "no");
+        if(answer)
+        {
+            notificationActive = 1;
+
+        }
+        var assesment = new Assesment()
+            {
+                assesmentType = assesmentType,
+                Name = assesmentName,
+                courseInfo = assesmentInfo,
+                notificationActivation = notificationActive,
+                courseId = CourseId,
+                assesmentId = chosenAssesmentId
+
+            };
+        await DataService.UpdateAssesment(assesment);
+        await EditedAssesment.InvokeAsync();
+        await OnClose.InvokeAsync();
+    }
+    private async Task DeleteAssesment()
+    {
+        if(chosenAssesmentId != 0)
+        {
+            var selectedAssesment = assementList.FirstOrDefault(a => a.assesmentId == chosenAssesmentId);
+            await DataService.DeleteAssesment(selectedAssesment);
+            await EditedAssesment.InvokeAsync();
+            await OnClose.InvokeAsync();
+        }
+        
+    }
+    
+}

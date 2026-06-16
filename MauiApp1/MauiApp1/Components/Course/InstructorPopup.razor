@@ -1,0 +1,103 @@
+@inject MauiApp1.Services.DataService DataService
+@using MauiApp1.Storage
+@using MauiApp1.Components.Shared
+<ModalPopup IsVisible="@IsVisible" Title="Instructor" OnClose="OnClose" ShowDefaultButtons="false">
+    @if (!isEditing)
+    {
+        <div>
+            <p>@Instructor?.Name</p>
+            <p>@Instructor?.phone</p>
+            <a href="@Instructor?.email.ToString()">@Instructor?.email</a>
+        </div>
+        <div class="buttonHolder">
+            <button class="termOptions" @onclick="StartEdit">Edit</button>
+            <button class="termOptions" @onclick="DeleteInstructor">Delete</button>
+            <button class="termOptions" @onclick="OnClose">Back</button>
+        </div>
+    }
+    else
+    {
+        <div>
+            <label for="instructor_Name">Name:</label>
+            <br />
+            <input id="instructor_Name" type="text" @bind="instructorName">
+            <br>
+            <label for="instructor_phone">Phone:</label>
+            <br />
+            <input type="text" @bind="instructorPhone" id="instructor_phone">
+            <br />
+            <label for="instructor_email">Email:</label>
+            <br />
+            <input type="text" @bind="instructorEmail" id="instructor_email">
+        </div>
+                    <div class="buttonHolder">
+            <button class="termOptions" @onclick="SaveInstructor">Save</button>
+            <button class="termOptions" @onclick="CancelEdit">Cancel</button>
+        </div>
+    }
+</ModalPopup>
+
+@code {
+    [Parameter] public bool IsVisible { get; set; }
+    [Parameter] public Instructor? Instructor { get; set; }
+    [Parameter] public EventCallback OnClose { get; set; }
+    [Parameter] public EventCallback OnInstructorDeleted { get; set; }
+    [Parameter] public EventCallback OnInstructorUpdated { get; set; }
+
+    private bool isEditing = false;
+    private string instructorName = string.Empty;
+    private string instructorPhone = string.Empty;
+    private string instructorEmail = string.Empty;
+
+    private void StartEdit()
+    {
+        if (Instructor != null)
+        {
+            instructorName = Instructor.Name ?? string.Empty;
+            instructorPhone = Instructor.phone ?? string.Empty;
+            instructorEmail = Instructor.email ?? string.Empty;
+            isEditing = true;
+        }
+    }
+
+    private void CancelEdit()
+    {
+        isEditing = false;
+    }
+
+    private async Task SaveInstructor()
+    {
+        if (string.IsNullOrWhiteSpace(instructorName) || 
+            string.IsNullOrWhiteSpace(instructorEmail) || 
+            string.IsNullOrWhiteSpace(instructorPhone))
+        {
+            await Application.Current.MainPage.DisplayAlertAsync("Error", "All fields required", "ok");
+            return;
+        }
+
+        if (Instructor != null)
+        {
+            Instructor.Name = instructorName;
+            Instructor.phone = instructorPhone;
+            Instructor.email = instructorEmail;
+            
+            await DataService.UpdateInstructor(Instructor);
+            await OnInstructorUpdated.InvokeAsync();
+            
+            isEditing = false;
+        }
+    }
+
+    private async Task DeleteInstructor()
+    {
+        var answer = await Application.Current.MainPage!.DisplayAlertAsync(
+            "WARNING!", "Are you sure you want to delete this instructor?", "yes", "no");
+        
+        if (answer && Instructor != null)
+        {
+            await DataService.DeleteInstructor(Instructor);
+            await OnInstructorDeleted.InvokeAsync();
+            await OnClose.InvokeAsync();
+        }
+    }
+}

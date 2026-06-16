@@ -1,5 +1,5 @@
 wwwroot\app.css
-wwwroot\images\dotnet_bot.svg
+wwwroot\Images\logo.png
 wwwroot\index.html
 wwwroot\lib\bootstrap\dist\css\bootstrap.min.css
 wwwroot\lib\bootstrap\dist\css\bootstrap.min.css.map

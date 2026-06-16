@@ -1,0 +1,135 @@
+﻿@page "/CoursePage/{CourseId:int}"
+@inject MauiApp1.Services.DataService DataService
+@using System.Linq
+@using MauiApp1.Storage
+@using MauiApp1.Components.Course
+@using MauiApp1.Components.Shared
+<div style="position:relative; display:flex; align-items:center; min-height:40px;">
+    <NavLink href="">
+        <button class="backButton">Back</button>
+    </NavLink>
+
+    <span style="position:absolute; left:50%; transform:translateX(-50%); font-size:25px;">
+        @chosenCourse?.courseName
+    </span>
+
+    @if (chosenCourse?.active == 1)
+    {
+        <span style="margin-left:auto; color:greenyellow;">Active ●</span>
+    }
+    else
+    {
+        <span style="margin-left:auto; color:red;">InActive ●</span>
+    }
+</div>
+
+<div style="text-align:center;">
+    @chosenCourse?.courseStartDate.ToShortDateString() - @chosenCourse?.courseEndDate.ToShortDateString()
+</div>
+    
+  
+
+<aside style="display: flex; justify-content: space-between;">
+    <button @onclick="() => showNotes = true" class="termOptions">Notes</button>
+    <button @onclick="() => showInstructor = true" class="termOptions">Instructor</button>
+    
+</aside>
+<div style="display:flex; justify-content:right;"><button @onclick="() => showCourseInfo = true" class="termOptions">Course Info</button></div>
+
+<div style="background:lightgrey; padding:12px; width:70%;  border-radius:15px; justify-content:center;display:flex; left:50%;transform: translateX(-50%); position:fixed; bottom:60px;flex-direction: column">
+    <p>Assessments</p>
+    @foreach (var assessment in assessmentList)
+    {
+        
+        <p>(@assessment.assesmentType) @assessment.Name</p>
+        <p>● @assessment.courseInfo</p>
+    }
+
+    <button @onclick="() => showCreateAssessment = true" class="termOptions">Create Assessment</button>
+    <button @onclick="() => HandleAssesmentPopup()" class="termOptions">Edit Assesments</button>
+    
+
+</div>
+
+
+<NotesPopup IsVisible="@showNotes" CourseId="@CourseId" OnClose="() => showNotes = false" />
+
+<InstructorPopup IsVisible="@showInstructor" 
+                 Instructor="@chosenInstructor" 
+                 OnClose="() => showInstructor = false"
+                 OnInstructorDeleted="HandleInstructorDeleted"
+                 OnInstructorUpdated="LoadInstructor" />
+
+<AssessmentCreatePopup IsVisible="@showCreateAssessment" 
+                       CourseId="@CourseId"
+                       CurrentAssessmentCount="@assessmentList.Count"
+                       OnClose="() => showCreateAssessment = false"
+                       OnAssessmentAdded="RefreshAssessments" />
+
+<CourseInfoPopup IsVisible="@showCourseInfo" 
+                 CourseId="@CourseId"
+                 OnClose="() => showCourseInfo = false" />
+<EditAssesment IsVisible="@showEditAssesment"
+                CourseId="@CourseId"
+                
+                
+                OnClose="() => showEditAssesment = false"
+               EditedAssesment="RefreshAssessments"              
+/>
+
+
+
+@code {
+    [Parameter] public int CourseId { get; set; }
+
+    private Course? chosenCourse;
+    private Instructor? chosenInstructor;
+    private List<Assesment> assessmentList = new();
+
+    private bool showNotes = false;
+    private bool showInstructor = false;
+    private bool showCreateAssessment = false;
+    private bool showCourseInfo = false;
+    private bool showEditAssesment = false;
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadCourse();
+        await LoadInstructor();
+        await RefreshAssessments();
+    }
+
+    private async Task LoadCourse()
+    {
+        var courseList = await DataService.GetCourse();
+        chosenCourse = courseList?.FirstOrDefault(c => c.courseId == CourseId);
+    }
+
+    private async Task LoadInstructor()
+    {
+        if (chosenCourse == null) return;
+
+        var instructorList = await DataService.GetInstructor();
+        chosenInstructor = instructorList?.FirstOrDefault(i => i.instructorId == chosenCourse.instructorId);
+    }
+
+    private async Task RefreshAssessments()
+    {
+        var allAssessments = await DataService.GetAssesments();
+        assessmentList = allAssessments?.Where(a => a.courseId == CourseId).ToList() ?? new();
+    }
+
+    private async Task HandleInstructorDeleted()
+    {
+        if (chosenCourse != null)
+        {
+            await DataService.DeleteCourse(chosenCourse);
+        }
+    }
+    private async Task HandleAssesmentPopup()
+    {
+        await RefreshAssessments();
+        showEditAssesment = true;
+    }
+    
+}
+

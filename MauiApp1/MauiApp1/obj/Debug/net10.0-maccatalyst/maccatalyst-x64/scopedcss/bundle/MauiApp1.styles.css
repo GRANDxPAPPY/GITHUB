@@ -78,6 +78,7 @@ main[b-w4ahko8s4q] {
 }
 /* /Components/Layout/NavMenu.razor.rz.scp.css */
 .navbar-toggler[b-hl3llo7rh3] {
+    display:none;
     appearance: none;
     cursor: pointer;
     width: 3.5rem;

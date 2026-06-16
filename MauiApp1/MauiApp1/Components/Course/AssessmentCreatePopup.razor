@@ -1,0 +1,92 @@
+@inject MauiApp1.Services.DataService DataService
+@using MauiApp1.Storage
+@using MauiApp1.Components.Shared
+
+<ModalPopup IsVisible="@IsVisible" Title="Create Assessment" OnClose="OnClose" ShowDefaultButtons="false">
+    <label>Assessment Name:</label>
+    <input type="text" @bind="assessmentName">
+    
+        <label>Type:</label>
+        <select @bind="assessmentType">
+            <option value="PA">PA</option>
+            <option value="OA">OA</option>
+        </select>
+        <br />
+        <label for="startDate">Start Date:</label>
+        <input type="date" id="dueDate" @bind="startDate" />
+        <br />
+        <label for="dueDate">Due Date:</label>
+        <input type="date" id="dueDate" @bind="dueDate" />
+        <label for="courseInfo">Enter Course Info:</label>
+        <textarea id="courseInfo" @bind="assesmentInfo" placeholder="Enter Course Info here"></textarea>
+
+        
+    
+        <div class="buttonHolder">
+            <button class="termOptions" @onclick="AddAssessment">Add</button>
+            <button class="termOptions" @onclick="OnClose">Cancel</button>
+        </div>
+    
+    </ModalPopup>
+
+@code {
+    [Parameter] public bool IsVisible { get; set; }
+    [Parameter] public int CourseId { get; set; }
+    [Parameter] public int CurrentAssessmentCount { get; set; }
+    [Parameter] public EventCallback OnClose { get; set; }
+    [Parameter] public EventCallback OnAssessmentAdded { get; set; }
+
+    private string assessmentName = string.Empty;
+    private string assessmentType = "PA";
+    private DateTime dueDate = DateTime.Today;
+    private string assesmentInfo = "";
+    private DateTime startDate = DateTime.Today;
+    private int notificationActive = 0;
+
+    private async Task AddAssessment()
+    {
+        var answer = await Application.Current.MainPage.DisplayAlertAsync("Before Submission", "Do you wish to get a notifications for start and end dates for assesment?", "yes", "no");
+        if(answer)
+        {
+            notificationActive = 1;
+
+        }
+        else
+        {
+            notificationActive = 0;
+        }
+        if (CurrentAssessmentCount >= 2)
+        {
+            await Application.Current!.MainPage!.DisplayAlertAsync(
+                "Error", "Course can only have 2 assessments at a time", "ok");
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(assessmentName))
+        {
+            await Application.Current!.MainPage!.DisplayAlertAsync(
+                "Error", "Assessment name is required", "ok");
+            return;
+        }
+        
+        var assessment = new Assesment
+        {
+            assesmentType = assessmentType,
+            Name = assessmentName,
+            courseId = CourseId,
+            startDate = startDate,
+            dueDate = dueDate,
+            notificationActivation = notificationActive,
+            courseInfo =assesmentInfo
+           
+        };
+        
+        await DataService.AddAssesment(assessment);
+        await OnAssessmentAdded.InvokeAsync();
+        
+        assessmentName = string.Empty;
+        assessmentType = "PA";
+        
+        await OnClose.InvokeAsync();
+    }
+}

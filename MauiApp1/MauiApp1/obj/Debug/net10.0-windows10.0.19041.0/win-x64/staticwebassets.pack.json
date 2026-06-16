@@ -13,12 +13,16 @@
       "PackagePath": "staticwebassets\\MauiApp1.styles.css"
     },
     {
-      "Id": "C:\\Users\\brysi\\GITHUB\\GITHUB\\MauiApp1\\MauiApp1\\wwwroot\\app.css",
-      "PackagePath": "staticwebassets\\app.css"
+      "Id": "C:\\Users\\brysi\\GITHUB\\GITHUB\\MauiApp1\\MauiApp1\\wwwroot\\Images\\dumplin.png",
+      "PackagePath": "staticwebassets\\Images\\dumplin.png"
     },
     {
-      "Id": "C:\\Users\\brysi\\GITHUB\\GITHUB\\MauiApp1\\MauiApp1\\wwwroot\\images\\dotnet_bot.svg",
-      "PackagePath": "staticwebassets\\images\\dotnet_bot.svg"
+      "Id": "C:\\Users\\brysi\\GITHUB\\GITHUB\\MauiApp1\\MauiApp1\\wwwroot\\Images\\logo.png",
+      "PackagePath": "staticwebassets\\Images\\logo.png"
+    },
+    {
+      "Id": "C:\\Users\\brysi\\GITHUB\\GITHUB\\MauiApp1\\MauiApp1\\wwwroot\\app.css",
+      "PackagePath": "staticwebassets\\app.css"
     },
     {
       "Id": "C:\\Users\\brysi\\GITHUB\\GITHUB\\MauiApp1\\MauiApp1\\wwwroot\\index.html",

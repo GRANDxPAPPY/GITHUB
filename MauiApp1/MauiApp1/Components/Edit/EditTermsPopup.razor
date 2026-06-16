@@ -1,0 +1,72 @@
+﻿@inject MauiApp1.Services.DataService DataService
+@using MauiApp1.Components.Shared
+@using MauiApp1.Storage
+@using System.Linq
+
+<ModalPopup IsVisible="@IsVisible" Title="Edit Term" OnClose="OnClose">
+
+    @if (term != null)
+    {
+        <label>Term Name:</label>
+        <input type="text" @bind="term.termName" />
+
+        <label>Start Date</label>
+        <input type="date" @bind="term.termStartDate" />
+
+        <label>End Date</label>
+        <input type="date" @bind="term.termEndDate" />
+
+        <div class="buttonHolder">
+            <button class="termOptions" @onclick="SaveTerm">Submit</button>
+            <button class="termOptions" @onclick="PopDownUpdate">Cancel</button>
+        </div>
+    }
+
+</ModalPopup>
+
+@code {
+    
+
+    [Parameter] public bool IsVisible { get; set; }
+    [Parameter] public int TermId { get; set; }
+    [Parameter] public Term? term { get; set; }
+    [Parameter] public EventCallback OnClose { get; set; }
+    [Parameter] public EventCallback OnTermSaved { get; set; }
+
+    private List<Term> termList = new();
+
+    
+    protected override async Task OnParametersSetAsync()
+    {
+        if (IsVisible)
+        {
+            await PopUpUpdate();
+        }
+    }
+
+    internal async Task UpdateTermList()
+    {
+        termList = await DataService.GetTerms();
+        term = termList.FirstOrDefault(t => t.termId == TermId);
+    }
+
+    private async Task SaveTerm()
+    {
+        if (term == null) return;
+
+        await DataService.UpdateTerm(term);
+
+        
+        await OnTermSaved.InvokeAsync();
+    }
+
+    internal async Task PopUpUpdate()
+    {
+        await UpdateTermList();
+    }
+
+    internal async Task PopDownUpdate()
+    {
+        await OnClose.InvokeAsync();
+    }
+}

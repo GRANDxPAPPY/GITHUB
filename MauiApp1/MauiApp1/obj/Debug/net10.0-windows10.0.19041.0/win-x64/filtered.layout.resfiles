@@ -49,6 +49,7 @@ appiconWideTile.scale-125.png
 appiconWideTile.scale-150.png
 appiconWideTile.scale-200.png
 appiconWideTile.scale-400.png
+currentwireframe.scale-100.docx
 dotnet_bot.scale-100.png
 dotnet_bot.scale-125.png
 dotnet_bot.scale-150.png
@@ -60,10 +61,14 @@ splashSplashScreen.scale-150.png
 splashSplashScreen.scale-200.png
 splashSplashScreen.scale-400.png
 wwwroot\MauiApp1.styles.css
-wwwroot\MauiApp1.snpqo9rjqz.bundle.scp.css
+wwwroot\MauiApp1.y1encr71hm.bundle.scp.css
 AboutAssets.txt
+Hold ALL B-1 to B-3 docs\b_one.docx
+Hold ALL B-1 to B-3 docs\b_two.docx
+Hold ALL B-1 to B-3 docs\B-3.docx
 wwwroot\app.css
-wwwroot\images\dotnet_bot.svg
+wwwroot\Images\dumplin.png
+wwwroot\Images\logo.png
 wwwroot\index.html
 wwwroot\lib\bootstrap\dist\css\bootstrap.min.css
 wwwroot\lib\bootstrap\dist\css\bootstrap.min.css.map

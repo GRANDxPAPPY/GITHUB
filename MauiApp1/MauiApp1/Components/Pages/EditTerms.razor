@@ -1,0 +1,275 @@
+﻿@page "/EditTerm/{TermId:int}"
+@inject MauiApp1.Services.DataService DataService;
+@using MauiApp1.Components.Edit
+@using MauiApp1.Storage;
+@using System.Linq;
+@inject NavigationManager Nav;
+
+
+<div><NavLink href=""><button class="backButton">Back</button></NavLink> <span style="margin:10px"><img src="Images/dumplin.png" alt="Logo" hieght="110px" width="110px" style="display:block; margin-left:auto; margin-right:auto;" /></span></div>
+<div id="back_circle" style="text-align:center width: 200px;height: 200px; margin-bottom:20px">
+    <span margin:15px;>
+        Courses:
+    </span>
+    
+    <div style="background-color:grey; border-radius:15px; border:2px white solid; text-align:center; margin:5px;" @onclick="() => PopUpshowFormCourseAddToTerm()">
+        Add Course To Term +
+    </div>
+    <div style="background-color:grey; border-radius:15px; border:2px white solid; text-align:center; margin:5px;" @onclick="() => PopUpCreateCourse()">
+        Create Course
+    </div>
+    <div style="background-color:grey; border-radius:15px; border:2px white solid; text-align:center; margin:5px;" @onclick="() => PopUpUpdateCourse()">
+        Update Course
+    </div>
+</div>
+
+  
+
+
+@if (showFormCourseCreate)
+{
+    <div class="userPrompt">
+            
+        <label>Enter Course Name:</label>
+        <input type="text" @bind="courseName">
+            <label>Start Date</label>
+            <input type="date" @bind="courseStartDate" />
+            <label>End Date</label>
+            <input type="date" @bind="courseEndDate" />
+            <label for="selectinst">Select Instructor</label>
+            <select @bind="instructorId" id="selectinst">
+                @foreach (var instructor in instructorList)
+                {
+                    <option value="@instructor.instructorId">@instructor.Name</option>
+                }
+            </select>
+            <label for="courseactive">Select Course Status:</label>
+            <select id="courseactive" @bind="active">
+                <option value="1">Active</option>
+                <option value="2">InActive</option>
+            </select>
+            <div class="buttonHolder">
+                <button class="termOptions" @onclick="() => CreateCourse()">Submit</button>
+                <button class="termOptions" @onclick="() => PopDownCreateCourse()">Cancel</button>
+            </div>
+
+        </div>
+    }
+
+    <!--choose course and then we bind it to term-->
+    @if (showFormCourseAddToTerm)
+    {
+        <div class="userPrompt">
+            
+                    
+            <select @bind="selectedCourseId">
+                <option value="0">-- Select Course --</option>
+                @foreach (var item in courseList)
+                {
+                    <option value="@item.courseId">@item.courseName</option>
+                }
+            </select>
+            <div class="buttonHolder">
+                <button class="termOptions" @onclick="() => CourseAddToTerm()">Add</button>
+                <button class="termOptions" @onclick="() => PopDownshowFormCourseAddToTerm()">Cancel</button>
+            </div>
+        </div>
+    }
+
+    <!--Making Edit Course-->
+    @if (showUpdateCourse)
+    {
+        <div class="userPrompt">
+            
+                    
+            <select @bind="selectedUpdateCourse.courseId">
+                <option value="0">-- Select Course --</option>
+                @foreach (var item in courseList)
+                {
+                    <option value="@item.courseId">@item.courseName</option>
+                }
+            </select>
+            <label>Enter Course Name:</label>
+            <input type="text" @bind="selectedUpdateCourse.courseName">
+                <label>Start Date</label>
+                <input type="date" @bind="selectedUpdateCourse.courseStartDate" />
+                <label>End Date</label>
+                <input type="date" @bind="selectedUpdateCourse.courseEndDate" />
+                <label for="selectinst">Select Instructor</label>
+                <select @bind="selectedUpdateCourse.instructorId" id="selectinst">
+                    @foreach (var instructor in instructorList)
+                    {
+                        <option value="@instructor.instructorId">@instructor.Name</option>
+                    }
+                </select>
+                <label for="selectactive">Course Status:</label>
+                <select @bind="selectedUpdateCourse.active" id="selectactive">
+                    <option value="1">Active</option>
+                    <option value="2">InActive</option>
+                </select>
+                <div class="buttonHolder">
+                    <button class="termOptions" @onclick="() => UpdateCourse(selectedUpdateCourse)">Update</button>
+                    <button class="termOptions" @onclick="() => PopDownUpdateCourse()">Cancel</button>
+                </div>
+
+            </div>
+        }
+        <div id="back_circle" style="text-align:center; ">
+            <span margin:15px;>
+                Edit Term:
+            </span>
+            <div style="text-align:center; margin:5px;">
+        
+        
+                <span class="termOptions" @onclick="() => showUpdateTerm = true">UPDATE</span>
+        
+        
+
+                <span class="termOptions" @onclick="() => Confrimation(passingTerm)">DELETE</span>
+            </div>
+        </div>
+
+        @if (passingTerm != null)
+        {
+            <EditTermsPopup IsVisible="@showUpdateTerm"
+                            TermId="@TermId"
+                            term="@passingTerm"
+                            OnClose="() => showUpdateTerm = false"
+                            OnTermSaved="HandleTermSaved" />
+        }
+
+@code {
+    [Parameter] public int TermId { get; set; }
+    Term passingTerm;
+    List<Term> termList = new List<Term>();
+    bool showFormUpdate = false;
+    Course createdCourse;
+    int instructorId;
+    List<Course> courseList = new List<Course>();
+    bool showFormCourse = false;
+    bool showFormCourseCreate = false;
+    List<Instructor> instructorList = new List<Instructor>();
+    DateTime courseStartDate = DateTime.Today;
+    DateTime courseEndDate = DateTime.Today;
+    string courseName;
+    int active = 1;
+    int selectedCourseId = 0;
+    bool showUpdateCourse = false;
+    bool showFormCourseAddToTerm = false;
+    Course selectedUpdateCourse = new Course();
+    bool showUpdateTerm = false;
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        await UpdateTermList();
+        await UpdateCourseList();
+        await UpdateInstructorList();
+        passingTerm = termList.FirstOrDefault(b => b.termId == TermId);
+    }
+
+    internal async Task PopUpUpdate()
+    {
+
+        showFormUpdate = true;
+    }
+    internal async Task Confrimation(Term term)
+    {
+        var answer = await Application.Current.MainPage.DisplayAlertAsync("WARNING!", "Are you sure you want to make this desicion", "yes", "no");
+        if (answer)
+        {
+            await DataService.DeleteTerm(term);
+
+            Nav.NavigateTo($"/");
+        }
+    }
+
+    
+
+
+
+   
+
+    internal async Task UpdateTermList()
+    {
+        termList = await DataService.GetTerms();
+
+    }
+
+    internal async Task UpdateCourseList()
+    {
+        courseList = await DataService.GetCourse();
+    }
+    internal async Task PopUpAddCourse()
+    {
+        var course = new Course() { };
+        showFormCourse = true;
+
+    }
+
+    internal async Task PopUpCreateCourse()
+    {
+        showFormCourseCreate = true;
+        await UpdateInstructorList();
+    }
+
+    internal void PopDownCreateCourse()
+    {
+        showFormCourseCreate = false;
+    }
+    internal async Task CreateCourse()
+    {
+        var course = new Course() { courseName = courseName, courseEndDate = courseEndDate, courseStartDate = courseStartDate, instructorId = instructorId, active = active };
+        await DataService.AddCourse(course);
+        PopDownCreateCourse();
+    }
+
+    //instructor
+    internal async Task UpdateInstructorList()
+    {
+        instructorList = await DataService.GetInstructor();
+    }
+    internal async Task PopUpshowFormCourseAddToTerm()
+    {
+        await UpdateCourseList();
+
+        showFormCourseAddToTerm = true;
+    }
+
+    internal void PopDownshowFormCourseAddToTerm()
+    {
+        showFormCourseAddToTerm = false;
+    }
+    internal async Task CourseAddToTerm()
+    {
+        if (selectedCourseId == 0) return;
+
+        var selected = courseList.FirstOrDefault(c => c.courseId == selectedCourseId);
+        selected.termId = TermId;
+        await DataService.UpdateCourse(selected);
+        PopDownshowFormCourseAddToTerm();
+        selectedCourseId = 0;
+        await UpdateCourseList();
+    }
+    internal async Task UpdateCourse(Course course)
+    {
+        await DataService.UpdateCourse(course);
+        PopDownUpdateCourse();
+    }
+    internal void PopUpUpdateCourse()
+    {
+        showUpdateCourse = true;
+    }
+    internal void PopDownUpdateCourse()
+    {
+        showUpdateCourse = false;
+    }
+
+    
+    internal void HandleTermSaved()
+    {
+        showUpdateTerm = false;
+        Nav.NavigateTo("/");
+    }
+}

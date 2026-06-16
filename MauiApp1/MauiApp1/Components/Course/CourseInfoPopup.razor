@@ -1,0 +1,86 @@
+@inject MauiApp1.Services.DataService DataService
+@using MauiApp1.Storage
+@using MauiApp1.Components.Shared
+
+<ModalPopup IsVisible="@IsVisible" Title="Course Info" OnClose="OnClose" ShowDefaultButtons="false">
+    <div>
+        @foreach (var info in courseInfoList)
+        {
+            <p>@courseInfoList.IndexOf(info). @info.CourseBody</p>
+        }
+    </div>
+    
+    <input @bind="courseBody" placeholder="Add course info" />
+    <br />
+    <p>Choose Course Info to Edit</p>
+    <!--easire to read now that we found a better way to decoupl-->
+    @if (courseInfoList != null && courseInfoList.Any())
+    {
+        <select @bind="selectedCourseInfoId">
+            @foreach (var courseBody in courseInfoList)
+            {
+                <option value="@courseBody.Id">@courseInfoList.IndexOf(courseBody)  ...</option>
+            }
+        </select>
+    }
+    <div class="buttonHolder">
+        <button class="termOptions" @onclick="AddCourseInfo">Add Info</button>
+        
+        <button class="termOptions" @onclick="() =>UpdateCourseInfo(selectedCourseInfoId)">Edit Info</button>
+        <button class="termOptions" @onclick="OnClose">Back</button>
+        
+    </div>
+</ModalPopup>
+
+@code {
+    [Parameter] public bool IsVisible { get; set; }
+    [Parameter] public int CourseId { get; set; }
+    [Parameter] public EventCallback OnClose { get; set; }
+
+    private List<CourseInfo> courseInfoList = new();
+    private string courseBody = string.Empty;
+    private int selectedCourseInfoId;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (IsVisible)
+        {
+            await RefreshCourseInfo();
+        }
+    }
+
+    private async Task RefreshCourseInfo()
+    {
+        var allInfo = await DataService.GetCourseInfo();
+        courseInfoList = allInfo.Where(a => a.CourseId == CourseId).ToList();
+    }
+
+    private async Task AddCourseInfo()
+    {
+        if (string.IsNullOrWhiteSpace(courseBody))
+        {
+            await Application.Current!.MainPage!.DisplayAlertAsync(
+                "Error", "Course info cannot be empty", "ok");
+            return;
+        }
+
+        var courseInfo = new CourseInfo 
+        { 
+            CourseBody = courseBody, 
+            CourseId = CourseId 
+        };
+
+        await DataService.AddCourseInfo(courseInfo);
+        await RefreshCourseInfo();
+
+        courseBody = string.Empty;
+    }
+    private async Task UpdateCourseInfo(int courseInfoId)
+    {
+        var passingTerm = courseInfoList.FirstOrDefault(c => c.Id == courseInfoId);
+        passingTerm.CourseBody = courseBody;
+        await DataService.UpdateCourseInfo(passingTerm);
+    }
+
+    
+}

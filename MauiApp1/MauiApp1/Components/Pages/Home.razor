@@ -1,111 +1,233 @@
 ﻿@page "/"
-@using MauiApp1.Services
-@inject DataService DataService
-@using MauiApp1.Personel
+@using MauiApp1.Services;
+@using MauiApp1.Storage;
+@using System.Linq;
+@using Plugin.LocalNotification
+@using Plugin.LocalNotification.Core.Models
+@inject MauiApp1.Services.DataService DataService;
+@inject NavigationManager Nav;
 
 
-<h1>Watchbill</h1>
-<h2>SDO</h2>
-<h2>DCPO</h2>
+<h1 style="align-content:center">
+    <img src="Images/dumplin.png" alt="Logo" hieght="110px" width="110px" style="display:block; margin-left:auto; margin-right:auto;" />
+</h1>
 
 
-<aside style="float:right;">
-    <table>
-        <tr>
-            <th>Colors</th>
-        </tr>
-        <tr>
-            <td>Moring</td>
-            <td>Evening</td>
-            
-        </tr>
-        <tr>
-        <td>Morn</td>
-        <td>Eve</td>
-        </tr>
-        
-        <tr>
-        <td>Morn</td>
-        <td>Eve</td>
-        </tr>
-    </table>
-</aside>
-
-<table id="watchbill" width="70%">
-    <tr>
-    <th>Time</th>
-    <th>Senior</th>
-    <th>mid</th>
-    <th>Junior</th>
-        <th>Senior</th>
-        <th>mid</th>
-        <th>Junior</th>
-    </tr>
-    <tr>
-        <td>800-1200</td>
-        <td>filler person</td>
-        <td>Holla</td>
-        <td>John</td>
-        <td>water</td>
-        <td>smoke</td>
-        <td>himerdinger</td>
-    </tr>
+@if (showFormAdd)
+{
+    <div class="userPrompt">
+        <label>Enter Term Name:</label>
+        <input type="text" @bind="termName">
+        <label>Start Date</label>
+        <input type="date"  @bind="startDate" />
+        <label>End Date</label>
+        <input type="date" min="2020-01-01" @bind="endDate"/>
+            <div class="buttonHolder">
+        <button class="termOptions" @onclick="() => AddTerm()">Submit</button>
+        <button class="termOptions" @onclick="() => PopDownAdd()">Cancel</button>
+        </div>
+    </div>            
+}
+<div id="back_circle" style="text-align:center">
     
-</table>
-
-
-<aside style="float:right;">
-    <table>
-        <tr>
-            <th>Numbers</th>
-        </tr>
-    </table>
-</aside>
-
-
-
-
-<br style="margin-top:20px;">
-<table id="personel">
-    <caption>Personel</caption>
-    <tr>
-        <th>Name</th>
-        <th>Rank</th>
-        <th>Q</th>
-        <th>Lib/Month</th>
-    </tr>
-    @if (holdingList != null && holdingList.Any())
+    @if (termList != null)
     {
-        foreach (var person in holdingList)
+        foreach (Term Term in termList)
         {
-            <tr>
-                <td>@person.Name</td>
-                <td>@person.Rank</td>
-                <td>@person.Quals</td>
-                <td>@person.Lib</td>
-            </tr>
+
+            <span class="homePageTerms" @onclick="() => CoursesInTerm(Term)" @ondblclick="() => Wrapper(Term)" >@Term.termName</span>
+            
+        }
+    }
+    <span>
+        @* @if (termClicked) { <NavLink @onclick='() => Nav.NavigateTo($"/EditTerm/{passingTerm.termId}")'> <button style="border-radius:30px;">+</button></NavLink> } *@
+        
+                <span @onclick="PopUpAdd"> <button style="border-radius:30px;">+</button></span>
+        
+    </span>
+</div>
+
+
+
+<div  style="text-align:center"><span>@termDate @termEndDate</span></div>
+
+<div id="back_circle" style="text-align:center;height: 200px;">
+    @if (activeTermCourses != null)
+    {
+        foreach (var course in activeTermCourses)
+        {
+                <span style="background-color:grey; border-radius:15px; border:2px white solid; text-align:center; margin:5px;" @onclick='() => Nav.NavigateTo($"/CoursePage/{course.courseId}")'>@course.courseName</span>
+        }
+    }
+</div>
+
+
+@code{
+    bool showFormAdd = false;
+
+    DateTime startDate;
+
+    DateTime endDate;
+
+    string termName;
+
+    string termDate = DateTime.Today.ToShortDateString();
+    List<Term> termList;
+    string termEndDate= DateTime.Today.ToShortDateString();
+    List<Course> activeTermCourses;
+    List<Course> courseList;
+
+    //runs when program starts
+    protected override async Task OnInitializedAsync()
+    {
+        termList = await DataService.GetTerms();
+        courseList = await DataService.GetCourse();
+        await MakeNotificaitonsCourse();
+        if (await EnsureNotificationPermissionAsync())
+        {
+            await MakeNotificaitonsCourse();
+            await MakeNotificaitonsAssesment();
+
+
+        }
+
+    }
+
+
+    //taking datetimes making string
+    private void UpdateTermDate(Term term)
+    {
+        termDate = term.termStartDate.ToShortDateString();
+        termEndDate = term.termEndDate.ToShortDateString();
+
+    }
+
+    //passing term id to editterms
+    private void Wrapper(Term Term)
+    {
+
+        Nav.NavigateTo($"/EditTerm/{Term.termId}");
+    }
+
+    //are add term popup
+    internal async Task PopUpAdd()
+    {
+
+        startDate = DateTime.Today;
+        endDate = DateTime.Today;
+        showFormAdd = true;
+    }
+
+    internal void PopDownAdd()
+    {
+        showFormAdd = false;
+    }
+
+    internal async Task AddTerm()
+    {
+        if (startDate <= endDate)
+        {
+            var term = new Term() { termEndDate = endDate, termStartDate = startDate, termName = termName };
+            await DataService.AddTerm(term);
+            PopDownAdd();
+            await UpdateTermList();
+        }
+        else
+        {
+            Application.Current.MainPage.DisplayAlert("Error", "End date before start date", "ok");
         }
     }
 
-    <p>@dbpath</p>
-       
-    
-</table>
-
-@code 
-{
-    Personel tempPerson = new Personel();
-
-    List<Personel> holdingList;
-
-    string dbpath;
-
-    protected override async Task OnInitializedAsync()
+    internal async Task UpdateTermList()
     {
-        holdingList = await DataService.GetAllPersonelAsync();
+        termList = await DataService.GetTerms();
 
-        dbpath = await DataService.GetDataPath();
+    }
 
 
+
+    internal async Task CoursesInTerm(Term term)
+    {
+        UpdateTermDate(term);
+        var courseList = await DataService.GetCourse();
+        activeTermCourses = courseList.Where(c => c.termId == term.termId).ToList();
+
+    }
+    //Make this more flexible next time pass genreic objects
+
+    internal async Task MakeNotificaitonsCourse()
+    {
+        foreach(var course in courseList)
+        {
+            if (DateTime.Now.Day == course.courseStartDate.Day && DateTime.Now.Month == course.courseStartDate.Month &&DateTime.Now.Year == course.courseStartDate.Year)
+            {
+                var notification = new NotificationRequest
+                {
+                    NotificationId = 100,
+                    Title = "Course Starts Today!!",
+                    Description = course.courseName +" is starting Today, make sure to enroll in course",
+                    Android =
+    {
+        ChannelId = "general_channel"
+    }
+                };
+                await LocalNotificationCenter.Current.Show(notification);
+            }
+        }
+    }
+
+
+
+
+    internal async Task MakeNotificaitonsAssesment()
+    {
+        var assesmentsList = await DataService.GetAssesments();
+        
+        foreach (var assesment in assesmentsList)
+        {
+            if (assesment.startDate.ToShortDateString() == DateTime.Now.ToShortDateString() && assesment.notificationActivation == 1)
+            {
+                var notification = new NotificationRequest
+                {
+                    NotificationId = 110,
+                    Title = $"Time to Studay!!",
+                    Description = $"{assesment.Name}'s timer has started today make sure to manage your time wisely",
+                    Android =
+    {
+        ChannelId = "general_channel"
+    }
+                };
+                await LocalNotificationCenter.Current.Show(notification);
+            }
+            if (assesment.dueDate.ToShortDateString() == DateTime.Now.ToShortDateString())
+            {
+                var notification = new NotificationRequest
+                {
+                    NotificationId = 110,
+                    Title = $"Assesment Day!!",
+                    Description = $"{assesment.Name} is due today! Make sure not to miss it!",
+                    Android =
+    {
+        ChannelId = "general_channel"
+    }
+                };
+                await LocalNotificationCenter.Current.Show(notification);
+            }
+        }
+    }
+    private async Task<bool> EnsureNotificationPermissionAsync()
+    {
+#if ANDROID
+    var status = await Permissions.CheckStatusAsync<Permissions.PostNotifications>();
+
+    if (status != PermissionStatus.Granted)
+    {
+        status = await Permissions.RequestAsync<Permissions.PostNotifications>();
+    }
+
+    return status == PermissionStatus.Granted;
+#else
+        return true;
+#endif
     }
 }

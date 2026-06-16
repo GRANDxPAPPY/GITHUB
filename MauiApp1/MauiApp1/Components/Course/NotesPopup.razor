@@ -1,0 +1,117 @@
+@inject MauiApp1.Services.DataService DataService
+@using MauiApp1.Components.Shared
+@using MauiApp1.Storage
+<ModalPopup IsVisible="@IsVisible" Title="Notes" OnClose="OnClose" ShowDefaultButtons="false">
+    <div>
+        @foreach (var note in noteList)
+        {
+            <p style="font-size:18px;">@noteList.IndexOf(note).  @note.noteName</p>
+            <p>     @note.noteBody</p>
+            <br />
+        }
+    </div>
+    
+    <input @bind="noteName" placeholder="Note Name" />
+    <br />
+    <input @bind="noteBody" placeholder="Note Body" />
+    
+    <div>
+        
+        <button class="termOptions" @onclick="AddNote">Add Note</button>
+        
+
+    </div>
+    <div>
+        <br />
+        <label>Share:</label>
+        <br />
+        <select @bind="passingNote">
+            <option>--Choose Note Here--</option>
+            @foreach(var note in noteList)
+            {
+                <option value="@note.noteId">@note.noteName</option>
+            }
+        </select>
+        <br />
+        <br><div class="buttonHolder">
+        <button class="termOptions" @onclick="OnClose">Back</button>
+        <button class="termOptions" @onclick="() => ShareText(passingNote)">Share Notes</button>
+        </div>
+    </div>
+</ModalPopup>
+
+@code {
+    [Parameter] public bool IsVisible { get; set; }
+    [Parameter] public int CourseId { get; set; }
+    [Parameter] public EventCallback OnClose { get; set; }
+
+    private List<MauiApp1.Storage.Note> noteList = new();
+    private string noteName = string.Empty;
+    private string noteBody = string.Empty;
+    private int passingNote; 
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (IsVisible)
+        {
+            await RefreshNotes();
+        }
+    }
+
+    private async Task RefreshNotes()
+    {
+        var allNotes = await DataService.GetNotes();
+        noteList = allNotes.Where(n => n.courseId == CourseId).ToList();
+    }
+
+    private async Task AddNote()
+    {
+        if (string.IsNullOrWhiteSpace(noteName) || string.IsNullOrWhiteSpace(noteBody))
+        {
+            await Application.Current!.MainPage!.DisplayAlertAsync("Error", "Name and body required", "ok");
+            return;
+        }
+
+        var note = new Note
+            {
+                noteBody = noteBody,
+                noteName = noteName,
+                courseId = CourseId
+            };
+
+        await DataService.AddNotes(note);
+        await RefreshNotes();
+
+        noteName = string.Empty;
+        noteBody = string.Empty;
+    }
+    public async Task ShareText(int noteId)
+    {
+        if (noteId != 0)
+        {
+            var note = noteList.FirstOrDefault(n => n.noteId == noteId);
+
+            await Share.Default.RequestAsync(new ShareTextRequest
+                {
+                    Text = note.noteBody,
+                    Title = note.noteName,
+                });
+        }
+        else
+        {
+            return;
+        }
+    }
+
+    public async Task ShareUri(string uri, IShare share)
+    {
+        await share.RequestAsync(new ShareTextRequest
+        {
+            Uri = uri,
+            Title = "Share Web Link"
+        });
+    }
+        }
+        
+    
+
