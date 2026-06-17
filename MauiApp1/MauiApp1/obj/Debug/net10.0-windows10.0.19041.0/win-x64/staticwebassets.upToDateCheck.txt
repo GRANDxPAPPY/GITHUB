@@ -1,8 +1,8 @@
-wwwroot\app.css
-wwwroot\Images\dumplin.png
-wwwroot\Images\logo.png
-wwwroot\index.html
-wwwroot\lib\bootstrap\dist\css\bootstrap.min.css
 wwwroot\lib\bootstrap\dist\css\bootstrap.min.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap.min.css
+wwwroot\index.html
+wwwroot\Images\logo.png
+wwwroot\Images\dumplin.png
+wwwroot\app.css
 C:\Users\brysi\.nuget\packages\microsoft.aspnetcore.components.webview\10.0.0\build\..\staticwebassets\blazor.webview.js
 C:\Users\brysi\.nuget\packages\microsoft.aspnetcore.components.webview\10.0.0\build\..\staticwebassets\blazor.modules.json
