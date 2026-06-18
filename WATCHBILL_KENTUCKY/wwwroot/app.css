@@ -99,3 +99,10 @@ h1:focus {
         padding-left: env(safe-area-inset-left);
     }
 }
+
+/*my work starts here!*/
+
+.lock_screen_title {
+    align-content:center;
+    text-align:center;
+}
