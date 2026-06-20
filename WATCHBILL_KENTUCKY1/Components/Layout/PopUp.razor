@@ -1,0 +1,14 @@
+﻿@if (IsVisible)
+{
+    <div class="UserPrompt">
+        <h3>@Title</h3>
+        @FillerContent
+    </div>
+}
+
+@code {
+    [Parameter] public bool IsVisible { get; set; }
+    [Parameter] public RenderFragment? FillerContent { get; set; }
+    [Parameter] public string Title { get; set; }
+    [Parameter] public EventCallback OnClose { get; set; }
+}

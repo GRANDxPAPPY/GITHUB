@@ -1,0 +1,26 @@
+﻿@page "/userEdit/{UserId:int}"
+@using KENTUCKY_WATCHBILL1.Components.PopUps
+<h3>This will be for editing users</h3>
+<button @onclick="ShowAddUser">Add User</button>
+<button>Edit User</button>
+<button>Delete User</button>
+<button>Sections</button>
+
+
+@if(showAddUserVar ==true)
+{
+    <Add_User IsVisible="@showAddUserVar" OnClose="() => showAddUserVar = false" UserID="@UserId"></Add_User>
+}
+
+
+@code {
+    [Parameter]
+    public int UserId { get; set; }
+
+    bool showAddUserVar = false;
+
+    private  void ShowAddUser()
+    {
+        showAddUserVar = true;
+    }
+}

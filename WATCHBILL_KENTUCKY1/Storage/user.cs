@@ -12,6 +12,7 @@ namespace KENTUCKY_WATCHBILL1.Storage
         public string userPassword { get; set; }
         public string userName { get; set; }
         public string sailorName { get; set; }
-        
+        public string role { get; set; }
+
     }
 }

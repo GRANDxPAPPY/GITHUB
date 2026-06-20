@@ -19,16 +19,22 @@ namespace KENTUCKY_WATCHBILL1.Storage
             _database = new SQLiteAsyncConnection(path);
 
             await _database.CreateTablesAsync<Quals,Section,User,SectionLeader>();
-            //await TestingSection();
+            await TestingSection();
         }
 
         private async Task TestingSection()
         {
-            var placeHolderUser = new User() { userName="a", userPassword="a"};
-            var placeHolderSection = new Section() { };
-            var placeHolderSectionLeader = new SectionLeader() { };
-            var placeHolderQuals = new Quals() { };
-            await AddUser(placeHolderUser);
+            var holdingUserList = await GetUsers();
+            if( holdingUserList.Count() < 1)
+            {
+                var placeHolderUser = new User() { userName = "a", userPassword = "a", role = "WBC", sailorName = "cape" };
+                var placeHolderSection = new Section() { };
+                var placeHolderSectionLeader = new SectionLeader() { };
+                var placeHolderQuals = new Quals() { };
+                await AddUser(placeHolderUser);
+            }
+           
+            
         }
 
         public async Task AddUser(User user)

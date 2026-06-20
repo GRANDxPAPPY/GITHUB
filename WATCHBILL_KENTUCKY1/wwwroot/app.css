@@ -99,3 +99,15 @@ h1:focus {
         padding-left: env(safe-area-inset-left);
     }
 }
+/*MY CSS STARTS HERE!!!*/
+.UserPrompt {
+    background-color: slategray;
+    border-radius: 12px;
+    border: solid;
+    border-block-color: antiquewhite;
+
+    position: fixed;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+}

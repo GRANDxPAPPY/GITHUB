@@ -1,0 +1,13 @@
+﻿@inject KENTUCKY_WATCHBILL1.Storage.DataService dataService
+@using KENTUCKY_WATCHBILL1.Components.Layout
+@using System.Linq
+
+<PopUp IsVisible="@IsVisible" Title="Add User" OnClose="OnClose">
+    
+</PopUp>
+
+@code {
+    [Parameter] public bool IsVisible { get; set; }
+    [Parameter] public EventCallback OnClose { get; set; }
+    [Parameter] public int UserID { get; set; }
+}

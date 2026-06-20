@@ -26,15 +26,27 @@
     private async Task SubmitUser()
     {
         var returnedUser = await DataService.GetUser(userName);
-        if (returnedUser.userName != null && returnedUser.userPassword == userPass)
+        if (returnedUser.userName != null && returnedUser.userPassword !=null)
         {
-            Nav.NavigateTo($"/main/{returnedUser.userId}");
+            if(returnedUser.userName == userName && returnedUser.userPassword ==userPass){
+                if(returnedUser.role == "user")
+                {
+                    Nav.NavigateTo($"/main/{returnedUser.userId}");
+                }
+                else if (returnedUser.role =="admin" || returnedUser.role == "WBC")
+                {
+                    Nav.NavigateTo($"/userEdit/{returnedUser.userId}");
+                }
+            }
+                
+            
             // @onclick='() => Nav.NavigateTo($"/CoursePage/{course.courseId}")
         }
         else
         {
-            return;
+            //put message box here
         }
+
     }
     
 }
