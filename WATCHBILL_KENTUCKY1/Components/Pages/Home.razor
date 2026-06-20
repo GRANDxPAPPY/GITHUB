@@ -1,17 +1,40 @@
 ﻿@page "/"
 @using KENTUCKY_WATCHBILL1.Storage
 @inject DataService DataService
+@inject NavigationManager Nav;
 
 <h1 class="lock_screen_title">@placeHolderSection</h1>
+<br />
+<h1 class="lock_screen_title">Sign In</h1>
 
-
+<input @bind="userName" />
+<input @bind="userPass"  />
+<button @onclick="SubmitUser">Submit</button>
 
 @code
 {
     string placeHolderSection;
+    string userName;
+    string userPass;
+
     protected override async Task OnInitializedAsync()
     {
         await DataService.Init();
-        placeHolderSection = "Section 1";
+        placeHolderSection = "Hello!";
     }
+
+    private async Task SubmitUser()
+    {
+        var returnedUser = await DataService.GetUser(userName);
+        if (returnedUser.userName != null && returnedUser.userPassword == userPass)
+        {
+            Nav.NavigateTo($"/main/{returnedUser.userId}");
+            // @onclick='() => Nav.NavigateTo($"/CoursePage/{course.courseId}")
+        }
+        else
+        {
+            return;
+        }
+    }
+    
 }

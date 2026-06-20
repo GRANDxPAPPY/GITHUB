@@ -4,6 +4,7 @@ using System.Text;
 using SQLite;
 using System.IO;
 using System.Threading.Tasks;
+using System.Linq;
 namespace KENTUCKY_WATCHBILL1.Storage
 {
     public class DataService
@@ -23,7 +24,7 @@ namespace KENTUCKY_WATCHBILL1.Storage
 
         private async Task TestingSection()
         {
-            var placeHolderUser = new User() { };
+            var placeHolderUser = new User() { userName="a", userPassword="a"};
             var placeHolderSection = new Section() { };
             var placeHolderSectionLeader = new SectionLeader() { };
             var placeHolderQuals = new Quals() { };
@@ -43,6 +44,20 @@ namespace KENTUCKY_WATCHBILL1.Storage
                 await Application.Current.Windows[0].Page.DisplayAlertAsync("Warning", "Error Entering User in Database", "ok");
                 return;
             }
+            
+        }
+
+        public async Task<List<User>> GetUsers()
+        {
+            await Init();
+           var userList = await _database.Table<User>().ToListAsync();
+            return userList;
+        }
+
+        public async Task<User> GetUser(string userName)
+        {
+            var user = await _database.Table<User>().FirstOrDefaultAsync(u => u.userName == userName);
+            return user;
             
         }
     }
