@@ -2,13 +2,13 @@
 {
     <div class="UserPrompt">
         <h3>@Title</h3>
-        @FillerContent
+        @ChildContent
     </div>
 }
 
 @code {
     [Parameter] public bool IsVisible { get; set; }
-    [Parameter] public RenderFragment? FillerContent { get; set; }
+    [Parameter] public RenderFragment? ChildContent { get; set; }
     [Parameter] public string Title { get; set; }
     [Parameter] public EventCallback OnClose { get; set; }
 }

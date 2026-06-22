@@ -1,0 +1,71 @@
+﻿@inject KENTUCKY_WATCHBILL1.Storage.DataService dataService
+@using KENTUCKY_WATCHBILL1.Components.Layout
+@using System.Linq
+@using KENTUCKY_WATCHBILL1.Storage
+<PopUp IsVisible="@IsVisible" Title="Add User" OnClose="OnClose">
+   <label for="">Username: </label>
+   <input @bind="userName"/>
+    <label for="">Password: </label>
+    <input @bind="userPass"/>
+    <label for="">Sailor Name: </label>
+    <input @bind="sailorName"/>
+    <label for=""> </label>
+    <select @bind="userRole">
+        <option value="Section Member">Section Member</option>
+        <option value="Section Leader">Section Leader</option>
+        <option value="WBC">WBC</option>
+        <option value="Admin">Admin</option>
+    </select>
+
+    <!--add functionality to add users to database hear-->
+    <button @onclick="PopDown">Cancel</button>
+    <button @onclick="CreateUser">Submit</button>
+</PopUp>
+
+@code {
+    [Parameter] public bool IsVisible { get; set; }
+    [Parameter] public EventCallback OnClose { get; set; }
+    [Parameter] public int UserID { get; set; }
+
+
+    internal string userName;
+    internal string userPass;
+    internal string sailorName;
+    private List<User> userList;
+    internal string userRole;
+    protected override async Task OnInitializedAsync()
+    {
+        GetUsers();
+    }
+    internal async void GetUsers()
+    {
+        userList = await dataService.GetUsers();
+    }
+
+
+    internal async Task CreateUser()
+    {
+        List<string> checkingString = new List<string> { userRole, sailorName, userName, userPass };
+        bool isNull = false;
+        foreach (var s in checkingString)
+        {
+            if (string.IsNullOrWhiteSpace(s)) isNull = true;
+
+        }
+        if (isNull){
+            Application.Current.Windows[0].Page.DisplayAlertAsync("Warning", "All blocks must be filled before entering user", "OK"); 
+            return;
+        }
+
+        var user = new User { role = userRole, sailorName = sailorName, userName = userName, userPassword = userPass };
+        await dataService.AddUser(user);
+        PopDown();
+        
+    }
+
+    internal async Task PopDown()
+    {
+        await OnClose.InvokeAsync();
+    }
+
+}
