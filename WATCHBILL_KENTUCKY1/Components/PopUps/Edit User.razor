@@ -1,0 +1,78 @@
+﻿@inject KENTUCKY_WATCHBILL1.Storage.DataService DataService
+@using System.Linq
+@using KENTUCKY_WATCHBILL1.Storage
+@using KENTUCKY_WATCHBILL1.Components.Layout
+
+<PopUp IsVisible="@IsVisible" OnClose="@OnClose" Title="Edit User">
+    <select @bind="selectedUserId">
+           @foreach(var user in userList)
+        {
+            <option value="@user.userId">@user.userName</option>
+        }
+    </select>
+    <label for="">New Username: </label>
+    <input @bind="userName" />
+    <label for="">New Password: </label>
+    <input @bind="userPass" />
+    <label for="">New Sailor Name: </label>
+    <input @bind="sailorName" />
+    <label for="">User Role: </label>
+    <select @bind="userRole">
+        <option value="">--Select Role--</option>
+        <option value="Section Member">Section Member</option>
+        <option value="Section Leader">Section Leader</option>
+        <option value="WBC">WBC</option>
+        <option value="Admin">Admin</option>
+    </select>
+    <button @onclick="PopDown">Cancel</button>
+    <button @onclick="@CreateUser">Submit</button>
+</PopUp>
+@code {
+    [Parameter] public bool IsVisible { get; set; }
+    [Parameter] public EventCallback OnClose { get; set; }
+    
+
+    string userName;
+    string userPass;
+    string sailorName;
+    string userRole;
+    List<User> userList = new List<User>();
+    int selectedUserId;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        userList = await DataService.GetUsers();
+    }
+
+    internal async Task EditUser(User user)
+    {
+        
+        await DataService.EditUser(user);
+        PopDown();
+    }
+
+    internal async Task CreateUser()
+    {
+        List<string> checkingString = new List<string> { userRole, sailorName, userName, userPass };
+        bool isNull = false;
+        foreach (var s in checkingString)
+        {
+            if (string.IsNullOrWhiteSpace(s)) isNull = true;
+
+        }
+        if (isNull)
+        {
+            await Application.Current.Windows[0].Page.DisplayAlertAsync("Warning", "All blocks must be filled before entering user", "OK");
+            return;
+        }
+
+        var user = new User { role = userRole, sailorName = sailorName, userName = userName, userPassword = userPass, userId = selectedUserId};
+        EditUser(user);
+    }
+
+    internal async Task PopDown()
+    {
+        await OnClose.InvokeAsync();
+    }
+}

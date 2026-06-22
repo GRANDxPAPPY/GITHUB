@@ -66,5 +66,21 @@ namespace KENTUCKY_WATCHBILL1.Storage
             return user;
             
         }
+        
+
+        public async Task EditUser(User user)
+        {
+            try
+            {
+                await Init();
+                await _database.UpdateAsync(user);
+            }
+            catch (Exception)
+            {
+                await Application.Current.Windows[0].Page.DisplayAlertAsync("Warning", "Error Updating User in Database", "ok");
+                return;
+
+            }
+        }
     }
 }
