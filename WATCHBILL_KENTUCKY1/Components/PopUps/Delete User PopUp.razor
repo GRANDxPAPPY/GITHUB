@@ -1,0 +1,42 @@
+﻿@inject KENTUCKY_WATCHBILL1.Storage.DataService DataService
+@using KENTUCKY_WATCHBILL1
+@using Storage
+@using Layout
+@using SQLite
+
+
+<PopUp IsVisible="@IsVisible" OnClose="@OnClose" Title="Delte User">
+    <select @bind="@selectedUserId">
+        @foreach(var user in userList)
+        {
+            <option value="@user.userId">@user.sailorName</option>
+        }
+    </select>
+    <button @onclick="PopDown">Cancel</button>
+    <button @onclick="DeleteUser">Delete</button>
+</PopUp>
+
+
+@code {
+    [Parameter] public bool IsVisible { get; set; }
+    [Parameter] public EventCallback OnClose { get; set; }
+
+    List<User> userList = new List<User>();
+    int selectedUserId;
+
+    protected override async Task OnInitializedAsync()
+    {
+        userList = await DataService.GetUsers();
+    }
+
+    internal async Task PopDown()
+    {
+        await OnClose.InvokeAsync();
+    }
+    internal async Task DeleteUser()
+    {
+        var user = await DataService.GetUserById(selectedUserId);
+        await DataService.DeleteUser(user);
+        await PopDown();
+    }
+}

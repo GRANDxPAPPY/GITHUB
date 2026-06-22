@@ -3,7 +3,7 @@
 <h3>This will be for editing users</h3>
 <button @onclick="ShowAddUser">Add User</button>
 <button @onclick="ShowEditUser">Edit User</button>
-<button>Delete User</button>
+<button @onclick="ShowDeleteUser">Delete User</button>
 <button>Sections</button>
 
 
@@ -14,7 +14,12 @@
 
 @if(showEditUserVar)
 {
-    <Edit_User IsVisible="@showEditUserVar" OnClose="() => showEditUserVar = false"></Edit_User>
+    <Edit_User_PopUp IsVisible="@showEditUserVar" OnClose="() => showEditUserVar = false"></Edit_User_PopUp>
+}
+
+@if (showDeleteUserVar)
+{
+    <Delete_User_PopUp IsVisible="@showDeleteUserVar" OnClose="() => showDeleteUserVar = false"></Delete_User_PopUp>
 }
 
 @code {
@@ -23,6 +28,7 @@
 
     bool showAddUserVar = false;
     bool showEditUserVar = false;
+    bool showDeleteUserVar = false;
 
     private  void ShowAddUser()
     {
@@ -31,5 +37,9 @@
     private void ShowEditUser()
     {
         showEditUserVar = true;
+    }
+    private void ShowDeleteUser()
+    {
+        showDeleteUserVar = true;
     }
 }

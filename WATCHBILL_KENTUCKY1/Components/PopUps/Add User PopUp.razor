@@ -17,6 +17,10 @@
         <option value="WBC">WBC</option>
         <option value="Admin">Admin</option>
     </select>
+    <select @bind="userSection">
+        <option value="">--Select Section--</option>
+        
+    </select>
 
     <!--add functionality to add users to database hear-->
     <button @onclick="PopDown">Cancel</button>
@@ -34,6 +38,7 @@
     internal string sailorName;
     private List<User> userList;
     internal string userRole;
+    internal string userSection;
     protected override async Task OnInitializedAsync()
     {
         GetUsers();
@@ -46,7 +51,7 @@
 
     internal async Task CreateUser()
     {
-        List<string> checkingString = new List<string> { userRole, sailorName, userName, userPass };
+        List<string> checkingString = new List<string> { userRole, sailorName, userName, userPass ,userSection};
         bool isNull = false;
         foreach (var s in checkingString)
         {
@@ -58,7 +63,7 @@
             return;
         }
 
-        var user = new User { role = userRole, sailorName = sailorName, userName = userName, userPassword = userPass };
+        var user = new User { role = userRole, sailorName = sailorName, userName = userName, userPassword = userPass /*ADD SECTION ID = HERE!!! */};
         await dataService.AddUser(user);
         PopDown();
         
