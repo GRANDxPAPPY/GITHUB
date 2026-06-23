@@ -1,0 +1,59 @@
+﻿@inject KENTUCKY_WATCHBILL1.Storage.DataService DataService
+@using KENTUCKY_WATCHBILL1.Storage
+@using KENTUCKY_WATCHBILL1.Components.Layout
+@using SQLite
+
+<PopUp IsVisible="@IsVisible" OnClose="@OnClose" Title="Section">
+    <label>Add Sections</label>
+    <input placeholder="Section Name" @bind="sectionName"/>
+    <aside>
+        <label>Delete Section</label>
+        <select @bind="selectedSectionId">
+            <option>--Choose Section--</option>
+            @foreach(var section in sectionList)
+            {
+                <option value="@section.sectionId">@section.sectionName</option>
+            }
+        </select>
+    </aside>
+    
+    <button @onclick="PopDown">Cancel</button>
+    <button @onclick="DeleteSection">Delete</button>
+    <button @onclick="CreateSection">Create</button>
+</PopUp>
+
+@code {
+    [Parameter] public bool IsVisible { get; set; }
+    [Parameter] public EventCallback OnClose { get; set; }
+
+    List<Section> sectionList = new List<Section>();
+    string sectionName;
+    int selectedSectionId =0;
+    /*FIX ME!!!!*/
+
+    protected override async Task OnParametersSetAsync()
+    {
+        sectionList = await DataService.GetSections();
+    }
+    internal async Task PopDown()
+    {
+        await OnClose.InvokeAsync();
+    }
+    internal async Task CreateSection()
+    {
+        if (string.IsNullOrWhiteSpace(sectionName)) return;
+        var section = new Section() { sectionName = sectionName};
+        await DataService.AddSection(section);
+        await PopDown();
+    }
+    internal async Task DeleteSection()
+    {
+        if (selectedSectionId == 0) return;
+        var chosenSection = await DataService.GetSectionById(selectedSectionId);
+        await DataService.DeleteSection(chosenSection);
+        await PopDown();
+
+        
+    }
+}
+

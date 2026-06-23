@@ -9,7 +9,7 @@ namespace KENTUCKY_WATCHBILL1.Storage
     {
         [PrimaryKey,AutoIncrement]
         public int sectionId { get; set; }
-        public int userId { get; set; }
+        
         public string sectionName { get; set; }
 
     }

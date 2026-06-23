@@ -4,7 +4,7 @@
 <button @onclick="ShowAddUser">Add User</button>
 <button @onclick="ShowEditUser">Edit User</button>
 <button @onclick="ShowDeleteUser">Delete User</button>
-<button>Sections</button>
+<button @onclick="ShowSectionEdit">Sections</button>
 
 
 @if(showAddUserVar ==true)
@@ -22,6 +22,10 @@
     <Delete_User_PopUp IsVisible="@showDeleteUserVar" OnClose="() => showDeleteUserVar = false"></Delete_User_PopUp>
 }
 
+@if(showSectionEditVar)
+{
+    <Edit_Section IsVisible="@showSectionEditVar" OnClose="() => showSectionEditVar = false"></Edit_Section>
+}
 @code {
     [Parameter]
     public int UserId { get; set; }
@@ -29,7 +33,7 @@
     bool showAddUserVar = false;
     bool showEditUserVar = false;
     bool showDeleteUserVar = false;
-
+    bool showSectionEditVar = false;
     private  void ShowAddUser()
     {
         showAddUserVar = true;
@@ -41,5 +45,9 @@
     private void ShowDeleteUser()
     {
         showDeleteUserVar = true;
+    }
+    private void ShowSectionEdit()
+    {
+        showSectionEditVar = true;
     }
 }

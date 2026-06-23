@@ -19,7 +19,11 @@
     </select>
     <select @bind="userSection">
         <option value="">--Select Section--</option>
-        
+        @foreach(var section in sectionList)
+        {
+            <option value="@section.sectionId">@section.sectionName</option>
+        }
+
     </select>
 
     <!--add functionality to add users to database hear-->
@@ -36,22 +40,24 @@
     internal string userName;
     internal string userPass;
     internal string sailorName;
+
     private List<User> userList;
+    private List<Section> sectionList = new();
+
     internal string userRole;
-    internal string userSection;
-    protected override async Task OnInitializedAsync()
-    {
-        GetUsers();
-    }
-    internal async void GetUsers()
+    internal int userSection;
+
+    protected override async Task OnParametersSetAsync()
     {
         userList = await dataService.GetUsers();
+        sectionList = await dataService.GetSections();
     }
+    
 
 
     internal async Task CreateUser()
     {
-        List<string> checkingString = new List<string> { userRole, sailorName, userName, userPass ,userSection};
+        List<string> checkingString = new List<string> { userRole, sailorName, userName, userPass ,userSection.ToString()};
         bool isNull = false;
         foreach (var s in checkingString)
         {
@@ -63,7 +69,7 @@
             return;
         }
 
-        var user = new User { role = userRole, sailorName = sailorName, userName = userName, userPassword = userPass /*ADD SECTION ID = HERE!!! */};
+        var user = new User { role = userRole, sailorName = sailorName, userName = userName, userPassword = userPass , sectionId = userSection};
         await dataService.AddUser(user);
         PopDown();
         

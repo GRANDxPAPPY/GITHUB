@@ -28,11 +28,13 @@ namespace KENTUCKY_WATCHBILL1.Storage
             var holdingUserList = await GetUsers();
             if (holdingUserList.Count() < 1)
             {
-                var placeHolderUser = new User() { userName = "a", userPassword = "a", role = "WBC", sailorName = "cape" };
-                var placeHolderSection = new Section() { };
+                var placeHolderUser = new User() { userName = "a", userPassword = "a", role = "WBC", sailorName = "cape", sectionId = 1 };
+                var placeHolderSection = new Section() { sectionName = "1" }; 
                 var placeHolderSectionLeader = new SectionLeader() { };
                 var placeHolderQuals = new Quals() { };
+                await AddSection(placeHolderSection);
                 await AddUser(placeHolderUser);
+                
             }
 
 
@@ -44,6 +46,7 @@ namespace KENTUCKY_WATCHBILL1.Storage
             {
                 await Init();
                 await _database.InsertAsync(user);
+                
             }
             catch (Exception)
             {
@@ -160,7 +163,7 @@ namespace KENTUCKY_WATCHBILL1.Storage
 
 
         }
-
+        
         public async Task<Section> GetSectionById(int sectionId)
         {
 
@@ -168,10 +171,10 @@ namespace KENTUCKY_WATCHBILL1.Storage
             await Init();
             var chosenSection = await _database.Table<Section>().FirstOrDefaultAsync(s => s.sectionId == sectionId);
             return chosenSection;
-            
-
 
         }
+        
+        
 
     }
 }
