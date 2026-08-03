@@ -11,6 +11,7 @@
 <input @bind="userPass"  />
 <button @onclick="SubmitUser">Submit</button>
 
+
 @code
 {
     string placeHolderSection;
@@ -29,17 +30,17 @@
         if (returnedUser.userName != null && returnedUser.userPassword !=null)
         {
             if(returnedUser.userName == userName && returnedUser.userPassword ==userPass){
-                if(returnedUser.role == "user")
+                if(returnedUser.role == "Section Member")
                 {
-                    Nav.NavigateTo($"/main/{returnedUser.userId}");
+                    Nav.NavigateTo($"/watchbill/{returnedUser.userId}");
                 }
                 else if (returnedUser.role =="admin" || returnedUser.role == "WBC")
                 {
                     Nav.NavigateTo($"/userEdit/{returnedUser.userId}");
                 }
             }
-                
-            
+
+
             // @onclick='() => Nav.NavigateTo($"/CoursePage/{course.courseId}")
         }
         else

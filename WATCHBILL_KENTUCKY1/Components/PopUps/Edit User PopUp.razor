@@ -24,25 +24,37 @@
         <option value="WBC">WBC</option>
         <option value="Admin">Admin</option>
     </select>
+    
+   <select @bind="userSection">
+        <option value="">--Select Section--</option>
+        @foreach(var section in sectionList)
+        {
+            <option value="@section.sectionId">@section.sectionName</option>
+        }
+
+    </select>
     <button @onclick="PopDown">Cancel</button>
     <button @onclick="@CreateUser">Submit</button>
 </PopUp>
 @code {
     [Parameter] public bool IsVisible { get; set; }
     [Parameter] public EventCallback OnClose { get; set; }
-    
+
 
     string userName;
     string userPass;
     string sailorName;
     string userRole;
+    int userSection;
     List<User> userList = new List<User>();
+    List<Section> sectionList = new List<Section>();
     int selectedUserId;
 
 
     protected override async Task OnInitializedAsync()
     {
         userList = await DataService.GetUsers();
+        sectionList = await DataService.GetSections();
     }
 
     internal async Task EditUser(User user)
@@ -54,7 +66,7 @@
 
     internal async Task CreateUser()
     {
-        List<string> checkingString = new List<string> { userRole, sailorName, userName, userPass };
+        List<string> checkingString = new List<string> { userRole, sailorName, userName, userPass , userSection.ToString()};
         bool isNull = false;
         foreach (var s in checkingString)
         {
@@ -67,8 +79,8 @@
             return;
         }
 
-        var user = new User { role = userRole, sailorName = sailorName, userName = userName, userPassword = userPass, userId = selectedUserId};
-        EditUser(user);
+        var user = new User { role = userRole, sailorName = sailorName, userName = userName, userPassword = userPass, userId = selectedUserId, sectionId = userSection};
+        await EditUser(user);
     }
 
     internal async Task PopDown()

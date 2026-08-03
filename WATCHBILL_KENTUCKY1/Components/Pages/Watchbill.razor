@@ -1,13 +1,182 @@
-﻿@page "/main/{UserId:int}"
-@* @page "/CoursePage/{CourseId:int}" *@
-<h1>This will HOLD WATCHBILL</h1>
+﻿@page "/watchbill/{UserId:int}"
+@inject KENTUCKY_WATCHBILL1.Storage.DataService DataService
+@using KENTUCKY_WATCHBILL1.Components
+@using KENTUCKY_WATCHBILL1.Storage
 
+@* <div class="watchbill-container">
+    <header class="watchbill-header">
+        <h2>USS KENTUCKY (SSBN 737) IN-PORT WATCHBILL</h2>
+        <div class="header-meta">
+            <strong>DUTY SECTION:</strong> @SelectedSectionId &nbsp;&nbsp;|&nbsp;&nbsp; <strong>DATE:</strong> @WatchbillDate
+        </div>
+    </header>
+
+    <div class="watchbill-grid">
+        <div class="left-column">
+            <div class="leadership-block">
+                <div class="role-box"><strong>SDO</strong><div class="assigned-name">@SdoName</div></div>
+                <div class="role-box"><strong>DCPO</strong><div class="assigned-name">@DcpoName</div></div>
+                <div class="role-box"><strong>EDO</strong><div class="assigned-name">@EdoName</div></div>
+                <div class="role-box"><strong>EDPO</strong><div class="assigned-name">@EdpoName</div></div>
+                <div class="role-box"><strong>SECTION LEADER</strong><div class="assigned-name">@SectionLeaderName</div></div>
+            </div>
+
+            <div class="stations-table">
+                <div class="table-header">
+                    <div>WATCH STATION</div>
+                    <div>0800 - 1200</div>
+                    <div>1200 - 1600</div>
+                    <div>1600 - 2000</div>
+                </div>
+                <div class="table-row">
+                    <div class="station-name">BDW</div>
+                    <div class="watchstander">@Bdw1</div>
+                    <div class="watchstander">@Bdw2</div>
+                    <div class="watchstander">@Bdw3</div>
+                </div>
+                <div class="table-row">
+                    <div class="station-name">POOD</div>
+                    <div class="watchstander">@Pood1</div>
+                    <div class="watchstander">@Pood2</div>
+                    <div class="watchstander">@Pood3</div>s
+                </div>
+                <div class="table-row">
+                    <div class="station-name">TRW</div>
+                    <div class="watchstander">@Trw1</div>
+                    <div class="watchstander">@Trw2</div>
+                    <div class="watchstander">@Trw3</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-column">
+            <div class="personnel-table">
+                <div class="table-header">
+                    <div>WATCHSTANDER</div>
+                    <div class="text-center">B</div>
+                    <div class="text-center">P</div>
+                    <div class="text-center">T</div>
+                    <div class="text-center">ASSIGNED</div>
+                </div>
+                @foreach (var user in userList)
+                {
+                    <div class="table-row">
+                        <div>@user.sailorName</div>
+                        <td class="text-center text-muted">X</td>
+                        <td class="text-center text-muted">X</td>
+                        <td class="text-center text-muted"></td>
+                        <td class="text-center font-weight-bold">@user.role</td>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div> *@
+
+<div class="watchbill-container">
+    <header class="watchbill-header">
+        <h2>USS KENTUCKY (SSBN 737) IN-PORT WATCHBILL</h2>
+        <div class="header-meta">
+            <strong>DUTY SECTION:</strong> 1 &nbsp;&nbsp;|&nbsp;&nbsp; <strong>DATE:</strong> 05MAR26
+        </div>
+    </header>
+
+    <div class="watchbill-grid">
+        <div class="left-column">
+            <div class="leadership-block">
+                <div class="role-box"><strong>SDO</strong><div class="assigned-name">LTJG COLLINS</div></div>
+                <div class="role-box"><strong>DCPO</strong><div class="assigned-name">FT1 GROSSMAN</div></div>
+                <div class="role-box"><strong>EDO</strong><div class="assigned-name">MMNC FLOODS</div></div>
+                <div class="role-box"><strong>EDPO</strong><div class="assigned-name">EM1 SMITH</div></div>
+                <div class="role-box"><strong>SECTION LEADER</strong><div class="assigned-name">STS2 BAKIRDAN</div></div>
+            </div>
+
+            <div class="stations-table">
+                <div class="table-header">
+                    <div>WATCH STATION</div>
+                    <div>0800 - 1200</div>
+                    <div>1200 - 1600</div>
+                    <div>1600 - 2000</div>
+                </div>
+                <div class="table-row">
+                    <div class="station-name">BDW</div>
+                    <div class="watchstander">COON</div>
+                    <div class="watchstander">YOUNG</div>
+                    <div class="watchstander">CAPE</div>
+                </div>
+                <div class="table-row">
+                    <div class="station-name">POOD</div>
+                    <div class="watchstander">ENGLE</div>
+                    <div class="watchstander">HERALD</div>
+                    <div class="watchstander">ORDUNA</div>
+                </div>
+                <div class="table-row">
+                    <div class="station-name">TRW</div>
+                    <div class="watchstander">HACKNEY</div>
+                    <div class="watchstander">JONES</div>
+                    <div class="watchstander">MILLER</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-column">
+            <div class="personnel-table">
+                <div class="table-header">
+                    <div>WATCHSTANDER</div>
+                    <div class="text-center">B</div>
+                    <div class="text-center">P</div>
+                    <div class="text-center">T</div>
+                    <div class="text-center">ASSIGNED</div>
+                </div>
+
+                <div class="table-row">
+                    <div>STS2 BAKIRDAN</div>
+                    <div class="text-center qualification-check">X</div>
+                    <div class="text-center qualification-check">X</div>
+                    <div class="text-center qualification-check">X</div>
+                    <div class="text-center role-tag">WSL</div>
+                </div>
+                <div class="table-row">
+                    <div>TM2 VINEYARD</div>
+                    <div class="text-center qualification-check">X</div>
+                    <div class="text-center qualification-check">X</div>
+                    <div class="text-center qualification-check"></div>
+                    <div class="text-center role-tag">W</div>
+                </div>
+                <div class="table-row">
+                    <div>ITR2 ERICKSON</div>
+                    <div class="text-center qualification-check">X</div>
+                    <div class="text-center qualification-check"></div>
+                    <div class="text-center qualification-check">X</div>
+                    <div class="text-center role-tag">R</div>
+                </div>
+                <div class="table-row">
+                    <div>ITN2 CAPE</div>
+                    <div class="text-center qualification-check">X</div>
+                    <div class="text-center qualification-check">X</div>
+                    <div class="text-center qualification-check">X</div>
+                    <div class="text-center role-tag">C</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 @code {
     //need parameter of passing ID
     [Parameter]
     public int UserId { get; set; }
+
+    List<User> userList = new List<User>();
+    protected override async Task OnInitializedAsync()
+    {
+        await GetUsers();
+    }
     //
+    internal async Task GetUsers()
+    {
+        await DataService.GetUsers();
+    }
 
     
 }

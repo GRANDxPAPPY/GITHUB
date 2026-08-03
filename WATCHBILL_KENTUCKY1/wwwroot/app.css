@@ -111,3 +111,103 @@ h1:focus {
     top: 50%;
     left: 50%;
 }
+
+
+/*Wathbill*/
+.watchbill-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #ffffff;
+    color: #333;
+    padding: 15px;
+}
+
+.watchbill-header {
+    text-align: center;
+    border-bottom: 3px double #002855; /* Navy themed rule */
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+/* Split sheet into 2 primary responsive chunks (Main Form vs Personnel List) */
+.watchbill-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+}
+
+@media (max-width: 992px) {
+    .watchbill-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Leadership block grid framework matching row layout of top elements */
+.leadership-block {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 5px;
+    margin-bottom: 15px;
+}
+
+.role-box {
+    border: 1px solid #111;
+    background: #f8f9fa;
+    text-align: center;
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+.assigned-name {
+    border-top: 1px solid #ddd;
+    background: #fff;
+    padding: 8px 4px;
+    font-weight: normal;
+    min-height: 20px;
+}
+
+/* Watchbill Spreadsheet Data Structures */
+.stations-table, .personnel-table {
+    border: 1px solid #222;
+    background-color: #fff;
+}
+
+.table-header {
+    background-color: #002855;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 0.85rem;
+    display: grid;
+    padding: 6px;
+}
+
+.stations-table .table-header, .stations-table .table-row {
+    grid-template-columns: 1.5fr repeat(3, 1fr);
+}
+
+.personnel-table .table-header, .personnel-table .table-row {
+    grid-template-columns: 2fr repeat(3, 40px) 1.5fr;
+}
+
+.table-row {
+    display: grid;
+    border-bottom: 1px solid #ccc;
+    padding: 6px;
+    font-size: 0.9rem;
+    align-items: center;
+}
+
+    .table-row:nth-child(even) {
+        background-color: #f2f5f8; /* Alternating grid lines */
+    }
+
+.station-name {
+    font-weight: bold;
+    color: #002855;
+}
+
+.text-center {
+    text-align: center;
+}
