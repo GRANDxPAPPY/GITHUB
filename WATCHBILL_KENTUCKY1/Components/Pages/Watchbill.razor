@@ -93,25 +93,43 @@
 
             <div class="stations-table">
                 <div class="table-header">
-                    <div>WATCH STATION</div>
-                    <div>0800 - 1200</div>
-                    <div>1200 - 1600</div>
-                    <div>1600 - 2000</div>
+                    <div>WATCH STATIONS</div>
+                    <div>BDW</div>
+                    <div>POOD</div>
+                    <div>TRW</div>
+                    <!--<div>BARGE</div>-->
                 </div>
                 <div class="table-row">
-                    <div class="station-name">BDW</div>
-                    <div class="watchstander">COON</div>
-                    <div class="watchstander">YOUNG</div>
-                    <div class="watchstander">CAPE</div>
+                    <div class="station-name">0800 - 1200- <!--the times will go here!--></div>
+                    
+                    
                 </div>
                 <div class="table-row">
-                    <div class="station-name">POOD</div>
+                    <div class="station-name">1200 - 1600</div>
                     <div class="watchstander">ENGLE</div>
                     <div class="watchstander">HERALD</div>
                     <div class="watchstander">ORDUNA</div>
                 </div>
                 <div class="table-row">
-                    <div class="station-name">TRW</div>
+                    <div class="station-name">1600 - 2000</div>
+                    <div class="watchstander">HACKNEY</div>
+                    <div class="watchstander">JONES</div>
+                    <div class="watchstander">MILLER</div>
+                </div>
+                <div class="table-row">
+                    <div class="station-name">2000 - 0000</div>
+                    <div class="watchstander">HACKNEY</div>
+                    <div class="watchstander">JONES</div>
+                    <div class="watchstander">MILLER</div>
+                </div>
+                <div class="table-row">
+                    <div class="station-name">0000 - 0400</div>
+                    <div class="watchstander">HACKNEY</div>
+                    <div class="watchstander">JONES</div>
+                    <div class="watchstander">MILLER</div>
+                </div>
+                <div class="table-row">
+                    <div class="station-name">0400 - TURN</div>
                     <div class="watchstander">HACKNEY</div>
                     <div class="watchstander">JONES</div>
                     <div class="watchstander">MILLER</div>
@@ -128,35 +146,20 @@
                     <div class="text-center">T</div>
                     <div class="text-center">ASSIGNED</div>
                 </div>
-
-                <div class="table-row">
-                    <div>BAKIRDAN</div>
-                    <div class="text-center qualification-check">X</div>
-                    <div class="text-center qualification-check">X</div>
-                    <div class="text-center qualification-check">X</div>
-                    <div class="text-center role-tag">WSL</div>
-                </div>
-                <div class="table-row">
-                    <div>VINEYARD</div>
-                    <div class="text-center qualification-check">X</div>
-                    <div class="text-center qualification-check">X</div>
-                    <div class="text-center qualification-check"></div>
-                    <div class="text-center role-tag">W</div>
-                </div>
-                <div class="table-row">
-                    <div>ERICKSON</div>
-                    <div class="text-center qualification-check">X</div>
-                    <div class="text-center qualification-check"></div>
-                    <div class="text-center qualification-check">X</div>
-                    <div class="text-center role-tag">R</div>
-                </div>
-                <div class="table-row">
-                    <div>ITN2 CAPE</div>
-                    <div class="text-center qualification-check">X</div>
-                    <div class="text-center qualification-check">X</div>
-                    <div class="text-center qualification-check">X</div>
-                    <div class="text-center role-tag">C</div>
-                </div>
+                @foreach(User sectionMember in sectionList)
+                {
+                    Quals qual = qualificationList.FirstOrDefault(s => s.userId == sectionMember.userId);
+                    <div class="table-row">
+                        <div>@sectionMember.sailorName.ToUpper()</div>
+                        
+                        <div class="text-center qualification-check">@(qual?.BDW == true ? "X": "")</div>
+                        <div class="text-center qualification-check">@(qual?.POOD == true ? "X" : "")</div>
+                        <div class="text-center qualification-check">@(qual?.TRW == true ? "X" : "")</div>
+                        <div class="text-center role-tag">WSL</div>
+                    </div>
+                }
+                
+                
             </div>
         </div>
     </div>
@@ -166,17 +169,20 @@
     //need parameter of passing ID
     [Parameter]
     public int UserId { get; set; }
-
-    List<User> userList = new List<User>();
+    List<Quals> qualificationList = new List<Quals>();
+    List<User> sectionList = new List<User>();
     protected override async Task OnInitializedAsync()
     {
-        await GetUsers();
+        await GetData();
     }
     //
-    internal async Task GetUsers()
+    internal async Task GetData()
     {
-        await DataService.GetUsers();
+        User activeUser = await DataService.GetUserById(UserId);
+        sectionList = await DataService.GetUserBySectionId(activeUser.sectionId);
+        qualificationList = await DataService.GetQualsBySectionId(activeUser.sectionId);
     }
+    
 
     
 }

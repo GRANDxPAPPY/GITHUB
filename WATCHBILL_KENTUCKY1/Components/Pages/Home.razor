@@ -8,7 +8,7 @@
 <h1 class="lock_screen_title">Sign In</h1>
 
 <input @bind="userName" />
-<input @bind="userPass"  />
+<input @bind="userPass" />
 <button @onclick="SubmitUser">Submit</button>
 
 
@@ -26,28 +26,43 @@
 
     private async Task SubmitUser()
     {
+
         var returnedUser = await DataService.GetUser(userName);
-        if (returnedUser.userName != null && returnedUser.userPassword !=null)
+        if (returnedUser != null && returnedUser.userName != null && returnedUser.userPassword != null)
         {
-            if(returnedUser.userName == userName && returnedUser.userPassword ==userPass){
-                if(returnedUser.role == "Section Member")
+
+            if (returnedUser.userName == userName && returnedUser.userPassword == userPass)
+            {
+                if (returnedUser.role == "Section Member" || returnedUser.role == "Section Leader")
                 {
                     Nav.NavigateTo($"/watchbill/{returnedUser.userId}");
                 }
-                else if (returnedUser.role =="admin" || returnedUser.role == "WBC")
+                else if (returnedUser.role == "admin" || returnedUser.role == "WBC")
                 {
                     Nav.NavigateTo($"/userEdit/{returnedUser.userId}");
                 }
             }
-
-
-            // @onclick='() => Nav.NavigateTo($"/CoursePage/{course.courseId}")
         }
         else
         {
-            //put message box here
+           await Application.Current.Windows[0].Page.DisplayAlertAsync("Error!", "Incorrect UserName or Password", "ok");
         }
 
+
+
+            
     }
+
+        
+
+
+
+    // @onclick='() => Nav.NavigateTo($"/CoursePage/{course.courseId}")
+
+        
+        
+
     
+    
+
 }

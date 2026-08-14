@@ -25,6 +25,13 @@
         }
 
     </select>
+    <label>Quals</label>
+    <label for="BDW">BDW</label>
+    <input type="checkbox" id="BDW" @bind="isQualifiedBDW" />
+    <label for="POOD">POOD</label>
+    <input type="checkbox" id="POOD" @bind="isQualifiedPOOD" />
+    <label for="BDW">TRW</label>
+    <input type="checkbox" id="TRW" @bind="isQualifiedTRW" />
 
     <!--add functionality to add users to database hear-->
     <button @onclick="PopDown">Cancel</button>
@@ -46,7 +53,9 @@
 
     internal string userRole;
     internal int userSection;
-
+    bool isQualifiedBDW;
+    bool isQualifiedPOOD;
+    bool isQualifiedTRW;
     protected override async Task OnParametersSetAsync()
     {
         userList = await dataService.GetUsers();
@@ -70,7 +79,11 @@
         }
 
         var user = new User { role = userRole, sailorName = sailorName, userName = userName, userPassword = userPass , sectionId = userSection};
-        await dataService.AddUser(user);
+        
+        int userId = await dataService.AddUser(user);
+        Quals quals = new Quals { BDW = isQualifiedBDW, POOD = isQualifiedPOOD, TRW = isQualifiedTRW, userId = userId,sectionId = userSection };
+        
+        await dataService.AddQuals(quals);
         PopDown();
         
     }

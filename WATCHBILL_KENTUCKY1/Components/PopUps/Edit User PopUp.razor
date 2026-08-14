@@ -33,6 +33,14 @@
         }
 
     </select>
+    <label>Quals</label>
+    <label for="BDW">BDW</label>
+    <input type="checkbox" id="BDW" @bind="isQualifiedBDW" />
+    <label for="POOD">POOD</label>
+    <input type="checkbox" id="POOD" @bind="isQualifiedPOOD"/>
+    <label for="BDW">TRW</label>
+    <input type="checkbox" id="TRW" @bind="isQualifiedTRW"/>
+    
     <button @onclick="PopDown">Cancel</button>
     <button @onclick="@CreateUser">Submit</button>
 </PopUp>
@@ -46,6 +54,9 @@
     string sailorName;
     string userRole;
     int userSection;
+    bool isQualifiedBDW;
+    bool isQualifiedPOOD;
+    bool isQualifiedTRW;
     List<User> userList = new List<User>();
     List<Section> sectionList = new List<Section>();
     int selectedUserId;
@@ -59,7 +70,7 @@
 
     internal async Task EditUser(User user)
     {
-        
+
         await DataService.EditUser(user);
         PopDown();
     }
@@ -80,7 +91,9 @@
         }
 
         var user = new User { role = userRole, sailorName = sailorName, userName = userName, userPassword = userPass, userId = selectedUserId, sectionId = userSection};
+        Quals quals = new Quals { BDW = isQualifiedBDW, POOD = isQualifiedPOOD, TRW = isQualifiedTRW,userId = selectedUserId, sectionId = userSection };
         await EditUser(user);
+        await DataService.AddQuals(quals);
     }
 
     internal async Task PopDown()

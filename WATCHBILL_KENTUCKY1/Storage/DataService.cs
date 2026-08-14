@@ -40,19 +40,20 @@ namespace KENTUCKY_WATCHBILL1.Storage
 
         }
 
-        public async Task AddUser(User user)
+        public async Task<int> AddUser(User user)
         {
             try
             {
                 await Init();
                 await _database.InsertAsync(user);
+                return user.userId;
                 
             }
             catch (Exception)
             {
 
                 await Application.Current.Windows[0].Page.DisplayAlertAsync("Warning", "Error Entering User in Database", "ok");
-                return;
+                return 0;
             }
 
         }
@@ -66,8 +67,18 @@ namespace KENTUCKY_WATCHBILL1.Storage
 
         public async Task<User> GetUser(string userName)
         {
-            var user = await _database.Table<User>().FirstOrDefaultAsync(u => u.userName == userName);
-            return user;
+            try
+            {
+                var user = await _database.Table<User>().FirstOrDefaultAsync(u => u.userName == userName);
+                return user;
+            }
+            catch (Exception)
+            {
+
+                await Application.Current.Windows[0].Page.DisplayAlertAsync("Warning", "Error Entering User in Database", "ok");
+                return null;
+            }
+            
 
         }
         public async Task<User> GetUserById(int userId)
@@ -76,7 +87,12 @@ namespace KENTUCKY_WATCHBILL1.Storage
             return user;
 
         }
-
+        public async Task<List<User>> GetUserBySectionId(int sectionId)
+        {
+            await Init();
+            List<User> userList = await _database.Table<User>().Where(s => s.sectionId == sectionId).ToListAsync();
+            return userList;
+        }
 
         public async Task EditUser(User user)
         {
@@ -174,6 +190,20 @@ namespace KENTUCKY_WATCHBILL1.Storage
 
         }
         
+        //Qual
+
+        public async Task<List<Quals>> GetQualsBySectionId(int sectionId)
+        {
+            await Init();
+            List<Quals> qualList = await _database.Table<Quals>().Where(q => q.sectionId == sectionId).ToListAsync();
+            return qualList;
+        }
+
+        public async Task AddQuals(Quals quals)
+        {
+            await Init();
+            await _database.InsertAsync(quals);
+        }
         
 
     }
